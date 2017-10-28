@@ -1,0 +1,59 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("adonde-home.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+
+p {
+    color: white;
+    position: absolute;
+    right: 3%;
+}
+
+#AppName{
+    padding: 15% 0;
+}
+
+h1 {
+    text-align: center;
+    font-size: 80px;
+    color: white;
+    font-family: 'Merriweather', serif;
+    
+}
+
+#Quote {
+    padding: 10px 0;
+}
+
+h4 {
+    text-align: center;
+    font-family: 'Libre Baskerville', serif;
+    color:white;
+}
+
+#SearchBar {
+    height: 65px;
+    width: 850px;
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    border-radius: 25px;
+    background-color: lightgrey;
+}
+
+#SearchSubmit {
+    position: absolute;
+    right: 3%;
+    top: 16%;
+}
+
+.form-group {
+    margin: 10px;
+}
+
+
