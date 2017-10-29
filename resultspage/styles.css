@@ -1,0 +1,24 @@
+#login {
+    color: #000;
+    position: absolute;
+    right: 3%;
+}
+#ResultsName{
+    padding: 5% 0 0 0%;
+    font-size: 80px;
+    color: #000;
+    font-family: 'Merriweather', serif;
+}
+.card-group{
+    display: flex;
+}
+
+.card {
+    width: 20em;
+    height: 30em;
+}
+
+h4 {
+    text-align: center;
+}
+
