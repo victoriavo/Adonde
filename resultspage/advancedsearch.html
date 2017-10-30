@@ -1,0 +1,27 @@
+<div class="container" id="advanced-search">
+            <h4> Advanced Search </h4>
+            <label class="p-3">Origin</label><input type="text" value="">
+            <label class="p-3">Budget</label><input type="number" value="">
+            <label class="p-3">Start Date</label><input type="Date" value="">
+            <label class="p-3">End Date</label><input type="Date" value="">
+            <div>
+                <input type="checkbox" class="d-inline" value="">
+                <label for="sel1" class="d-inline">Location Category</label>
+                <select class="form-control" id="sel1">
+                    <option></option>
+                    <option>Beach</option>
+                    <option>Mountains</option>
+                    <option>Urban</option>
+                </select>
+            </div>
+           
+            <div class="checkbox">
+                <label><input type="checkbox" value="">Minimum Distance</label>
+                <input type="number" class="form-control" id="min-distance" placeholder="Miles" min="0" step="10" style="width: 100px;">
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" value="">Maximum Distance</label>
+                <input type="number" class="form-control" id="max-distance" placeholder="Miles" min="0" step="10" style="width: 100px;">
+            </div>
+            <button type="button" class="btn btn-primary mt-4">Update</button>
+</div>
