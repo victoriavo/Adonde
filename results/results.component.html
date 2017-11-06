@@ -1,0 +1,18 @@
+<div id="AppName" class="fixed-top">
+    <h1>Ad‌&#243;nde</h1>
+</div>
+<div *ngFor="let destination of destinations" class="card h2 mt-4">
+    <div class="card-header">
+        <div class="d-flex justify-content-start">
+            {{destination[0]}}
+            <div class="ml-auto">
+                {{destination[2]}}
+            </div>
+        </div>
+    </div>
+    <div class="lead m-4">
+        {{destination[1]}}
+    </div>
+</div>
+
+{{resultArray | json}}
