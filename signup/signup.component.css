@@ -1,0 +1,14 @@
+#SignupName{
+    padding: 5% 0 0 0%;
+    font-size: 80px;
+    color: #000;
+}
+#AppName {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+}
+
+#label {
+    font-size: 20px;
+}
