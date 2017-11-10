@@ -1,0 +1,19 @@
+#SearchBar {
+    height: 65px;
+    width: 1050px;
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    border-radius: 25px;
+    background-color: lightgrey;
+}
+
+#SearchSubmit {
+    position: absolute;
+    right: 3%;
+    top: 16%;
+}
+
+.form-group {
+    margin: 10px;
+}
