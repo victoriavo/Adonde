@@ -1,0 +1,47 @@
+
+#loginbutton {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    margin: 10px;
+}
+#LoginTitle {
+    padding: 10% 0 3% 0;
+}
+
+#LoginText {
+    text-align: center;
+    font-size: 40px;  
+}
+
+#LoginLabel {
+    color: black;
+}
+
+#LoginTerminal {
+    width: 80%;
+    margin:0 auto;
+}
+
+h4 {
+    color:white;
+}
+
+#ForgotPswd {
+    color: orange;
+    text-align: center;
+}
+
+.wrapper {
+    text-align: center;
+}
+
+#keepSignedIn {
+    text-align: center;
+}
+
+#portalBody {
+    border-radius: 5%;
+    width: 40%;
+    height: 75%;
+}
