@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    
+}
+
+#SignupName{
+    padding: 5% 0 0 0%;
+    font-size: 80px;
+    color: #000;
+}
+#AppName {
+    font-family: 'Lobster', cursive;
+}
+
+#label {
+    font-size: 20px;
+}

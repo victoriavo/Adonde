@@ -1,0 +1,33 @@
+<body>
+                <nav class="navbar navbar-expand-lg navbar-light bg-faded justify-content-between">
+                                <h4 id="AppName">Ad‌&#243;nde</h4>
+                                <div id="navbarNav">
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item">
+                                            <a class="nav-link d-inline" href="#">Home <span class="sr-only"></span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+
+<div class="container">
+    <div id="SignupName">
+        <h1>Signup</h1>
+        <form>
+                <div class="form-group">
+                  <label id="label" class="col-form-label" for="formGroupforUserName">Your Name:</label>
+                  <input type="text" class="form-control" id="formGroupforUserName" placeholder="Name" [(ngModel)]="newUser.userName">
+                </div>
+                <div class="form-group">
+                  <label id="label" class="col-form-label" for="formGroupforEmail">Your Email:</label>
+                  <input type="text" class="form-control" id="formGroupforEmail" placeholder="Email" [(ngModel)]="newUser.email">
+                </div>
+                <div class="form-group">
+                        <label id="label" class="col-form-label" for="formGroupforPassword">Password:</label>
+                        <input type="password" class="form-control" id="formGroupforPassword" placeholder="Password"[(ngModel)]="newUser.password" >
+                </div>
+                <button type="button" class="btn btn-primary" (click)="signup()">Submit</button>
+        </form>
+    </div>
+</div>
+</body>
