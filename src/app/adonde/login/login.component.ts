@@ -8,6 +8,7 @@ import {User} from '../../domain';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent{
+    private user = new User();
     private login(){
         
     }
