@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+
+body {
+    background-image: url("/src/images/adonde-home.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+
+#loginbutton {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    margin: 10px;
+}
+#LoginTitle {
+    padding: 10% 0 3% 0;
+}
+
+#LoginText {
+    text-align: center;
+    font-size: 40px;  
+}
+
+#LoginLabel {
+    color: black;
+}
+
+#LoginTerminal {
+    width: 80%;
+    margin:0 auto;
+}
+
+h4 {
+    color:white;
+}
+
+#AppName{
+    font-family: 'Lobster', cursive;
+}
+
+#ForgotPswd {
+    color: orange;
+    text-align: center;
+}
+
+.wrapper {
+    text-align: center;
+}
+
+#keepSignedIn {
+    text-align: center;
+}
+
+#portalBody {
+    border-radius: 5%;
+    width: 40%;
+    height: 75%;
+}
+
+#createaccount{
+    text-align: center;
+}
