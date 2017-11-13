@@ -9,3 +9,5 @@ Responsibilities:
 -Created Location Repository
 -Refactored Search Results
 -Created Filtering Viewer
+-Created Query and Location Models
+-Made it possible to save searches
