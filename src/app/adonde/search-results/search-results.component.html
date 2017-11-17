@@ -1,0 +1,95 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-faded justify-content-between">
+    <h4 id="AppName">Ad‌&#243;nde</h4>
+        <div id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href routerLink="/login" class="nav-link d-inline">Login <span class="sr-only"></span></a>
+                </li>
+            </ul>
+        </div>
+</nav>
+<div class="container">
+  <div id="ResultsName">
+    <h1>Results</h1>
+  </div>
+  <div class="jumbotron" id="advanced-search">
+    <h5> Advanced Search </h5>
+    Show Advanced Search: <input type="checkbox">
+    <div class="container" id="advanced-search-attributes">
+      <label class="p-3">Origin</label><input type="text" value="newQuery.origin"
+      placeholder={{newQuery.origin}} 
+      [(ngModel)]="newQuery.origin" >
+      <label class="p-3">Budget</label><input type="number" value="newQuery.budget"
+      placeholder={{newQuery.budget}}
+      [(ngModel)]="newQuery.budget">
+      <label class="p-3">Start Date</label><input type="Date" value="newQuery.startDate"
+      [(ngModel)]="newQuery.startDate">
+      <label class="p-3">End Date</label><input type="Date" value="newQuery.endDate"
+      [(ngModel)]="newQuery.endDate">
+      <div>
+        <input type="checkbox" class="d-inline" value="">
+          <label for="sel1" class="d-inline">Location Category</label>
+        <select class="form-control" id="sel1">
+          <option></option>
+          <option *ngFor="let category of locationCategories; let i = index;" 
+          (click)="newQuery.locationCategory = category">{{ category }}</option>
+        </select>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Minimum Distance</label>
+        <input type="number" class="form-control" id="min-distance" placeholder="Miles" min="0" step="10" style="width: 100px;"
+        [(ngModel)]="newQuery.minDistance">
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Maximum Distance</label>
+        <input type="number" class="form-control" id="max-distance" placeholder="Miles" min="0" step="10" style="width: 100px;"
+        [(ngModel)]="newQuery.maxDistance">
+      </div>
+      <button type="button" class="btn btn-primary mt-4" 
+      (click)="updateSearch()"
+      [disabled]="!queries">Update</button>
+      <button type="button" class="btn btn-primary mt-4" (click)="saveSearch()">Save Search</button>
+    </div>  
+
+
+    <div class="jumbotron" *ngIf="queries.length > 0">
+      <h5>Search Criteria</h5>
+      <ul class="list-group">
+        <li class="list-group-item" *ngIf="queries[0].budget"
+        >Budget: {{queries[0].budget}}</li>
+        <li class="list-group-item" *ngIf="queries[0].origin"
+        >Origin: {{queries[0].origin}}</li>
+        <li class="list-group-item">
+          Start Date: {{queries[0].startDate}}
+        </li>
+        <li class="list-group-item">
+          End Date: {{queries[0].endDate}}
+        </li>
+        <li class="list-group-item">
+          Location Category: {{queries[0].locationCategory}}
+        </li>
+        <li class="list-group-item">
+          Minimum Distance: {{queries[0].minDistance}}
+        </li>
+        <li class="list-group-item">
+            Maximum Distance: {{queries[0].maxDistance}}
+        </li>
+      </ul>
+    </div>
+  </div>  
+
+  <br>
+  <br>
+
+  <div class="row" *ngIf="locations.length > 0">
+    <div class="card border-info m-4" *ngFor="let location of locations">
+      <img class="card-img-top" src="/src/images/{{location.imageName}}" alt="Card image cap" style="height:50%">
+      <div class="card-body">
+        <h4 class="card-title">{{location.name}}</h4>
+        <p class="card-text">{{location.description}}</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </div>
+    </div>
+  </div>   

@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AdondeModule } from './adonde/adonde.module'
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpModule, JsonpModule } from '@angular/http';
 
 const defaultRoute = '/home';
 
@@ -14,7 +14,8 @@ const defaultRoute = '/home';
         RouterModule.forRoot([
             { path: '', redirectTo: defaultRoute, pathMatch: 'full' }
         ]),
-        HttpClientModule
+        HttpModule,
+        JsonpModule
     ],
     declarations: [ 
         AppComponent 

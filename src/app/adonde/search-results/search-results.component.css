@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+
+#AppName{
+    font-family:'Lobster', cursive;
+}
+
+.card-group{
+    display: flex;
+}
+
+.card {
+    width: 20em;
+    height: 30em;
+}
+
