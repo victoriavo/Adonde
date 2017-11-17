@@ -1,5 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { HttpClient, HttpClientModule, HttpResponse } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import {User} from '../../domain';
 
 @Component({
@@ -9,8 +9,8 @@ import {User} from '../../domain';
 })
 export class LoginComponent{
     private user = new User();
-    private login(){
+    
         
-    }
+    
 
 }
