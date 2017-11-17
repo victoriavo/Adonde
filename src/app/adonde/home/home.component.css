@@ -1,44 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css?family=Lobster');
 
-p {
-    color: white;
-    position: absolute;
-    right: 3%;
-}
-
-#AppName{
-    padding: 15% 0;
-}
-
 body {
     background-image: url("/src/images/adonde-home.jpg");
     background-repeat: no-repeat;
     background-size:cover;
 }
 
-
 h1 {
-    text-align: center;
-    font-size: 80px;
-    color: white;
+    font-size: 7em;
     font-family: 'Lobster', cursive;
-    
-}
-
-#Quote {
-    padding: 10px 0;
 }
 
 h4 {
-    text-align: center;
     font-family: 'Open Sans', sans-serif;
-    color:white;
-}
-
-#loginlink {
-    position: fixed;
-    top: 0px;
-    right: 0px;
-    margin: 10px;
 }
