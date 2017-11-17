@@ -3,18 +3,15 @@
 
 body {
     font-family: 'Open Sans', sans-serif;
-    
+    background-image: url("/src/images/adonde-home.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
 }
 
-#SignupName{
-    padding: 5% 0 0 0%;
-    font-size: 80px;
-    color: #000;
-}
 #AppName {
     font-family: 'Lobster', cursive;
 }
 
 #label {
-    font-size: 20px;
+    font-size: 1.25em;
 }
