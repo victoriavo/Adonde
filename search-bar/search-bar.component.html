@@ -1,0 +1,34 @@
+<div id="SearchBar" class="d-flex justify-content-between rounded p-3" [ngClass]="bgcolor" (change)="update()">
+    <form class="form-inline my-auto">
+        <div class="form-group ml-2 mr-4">
+            <input type="number" class="form-control" id="budget" 
+            placeholder="Budget" min="0" step="10"
+            name="budget" [(ngModel)]="newQuery.budget">
+        </div>
+        <div class="form-group mr-4">
+            <input type="text" class="form-control" id="origin" 
+            placeholder="Origin"
+            name="origin" [(ngModel)]="newQuery.origin">
+        </div>
+        <div class="form-group">
+            <input type="date" 
+            class="form-control date-picker" id="start-date"
+            [ngClass]="{ 'placeholder': !newQuery.startDate}"
+            onfocus="javascript: $( this ).removeClass('placeholder');" 
+            onblur="javascript: if( !this.value ) $( this ).addClass('placeholder');"
+            placeholder="Start Date"           
+            name="startDate" [(ngModel)]="newQuery.startDate">
+        </div>
+        <div class="form-group">
+            <input type="date" 
+            class="form-control date-picker" id="end-date"
+            [ngClass]="{ 'placeholder': !newQuery.endDate}"
+            onfocus="javascript: $( this ).removeClass('placeholder');" 
+            onblur="javascript: if( !this.value ) $( this ).addClass('placeholder');"
+            placeholder="End Date"            
+            name="endDate" [(ngModel)]="newQuery.endDate">
+        </div>
+        <button type="button" class="btn btn-success ml-4 mr-2" id="SearchSubmit"
+        routerLink="/searchResults">Search</button>
+    </form>
+</div>

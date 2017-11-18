@@ -1,0 +1,13 @@
+.date-picker.placeholder::before{
+    width:100%;    
+    color: #888888;
+    content:attr(placeholder);
+}
+
+.date-picker{
+    width:15rem;
+}
+
+input {
+    height: 3em;
+}

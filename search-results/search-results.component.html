@@ -1,0 +1,117 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-faded justify-content-between">
+  <h4 id="AppName">Ad‌&#243;nde</h4>
+  <div id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a href routerLink="/login" class="nav-link d-inline">Login
+          <span class="sr-only"></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <div id="ResultsName">
+    <h1 class="display-4">
+      Results
+    </h1>
+  </div>
+  <div class="jumbotron p-2 d-flex flex-column bg-faded" id="advanced-search">
+
+    <search-bar bgcolor="bg-faded" class="mx-auto" (queryUpdated)="handleQueryUpdated($event)"></search-bar>
+    <p class="text-muted mx-auto mt-3">
+      <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+        <input type="checkbox" class="custom-control-input" (change)="toggleAdvanced()">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">Show Advanced Search</span>
+      </label>
+    </p>
+    <div class="container mt-3" id="advanced-search-attributes" [hidden]="!advancedShowing">
+      <div class="d-flex justify-content-center input-group col-md-6 mx-auto mb-3">
+        <span class="input-group-addon">
+          <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+            <input type="checkbox" id="check0" class="custom-control-input" (click)="check(0)">
+            <span class="custom-control-indicator"></span>
+          </label>
+        </span>
+        <select class="form-control w-50 d-inline" id="sel1" style="height:3em;" 
+                [ngClass]="dropdownColor" (change)="dropdownChange()" 
+                [disabled]="!checks[0]" [(ngModel)]="newQuery.locationCategory">
+          <option class="text-secondary" [ngValue] = "null">
+            Destination Category
+          </option>
+          <option class="text-dark" *ngFor="let category of locationCategories; let i = index;"
+                  [ngValue]="category">
+            {{ category }}
+          </option>
+        </select>
+      </div>
+      <div class="d-flex justify-content-center input-group col-md-6 mx-auto mb-3">
+        <span class="input-group-addon">
+          <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+            <input type="checkbox" id="check1" class="custom-control-input" (click)="check(1)">
+            <span class="custom-control-indicator"></span>
+          </label>
+        </span>
+        <input type="number" class="form-control" id="min-distance" placeholder="Minimum Distance" min="0" step="10" style="width: 100px;"
+          [(ngModel)]="newQuery.minDistance" [disabled]="!checks[1]">
+      </div>
+      <div class="d-flex justify-content-center input-group col-md-6 mx-auto mb-3">
+        <span class="input-group-addon">
+          <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+            <input type="checkbox" id="check2" class="custom-control-input"  (click)="check(2)">
+            <span class="custom-control-indicator"></span>
+          </label>
+        </span>
+        <input type="number" class="form-control" id="max-distance" placeholder="Maximum Distance" min="0" step="10" style="width: 100px;"
+          [(ngModel)]="newQuery.maxDistance" [disabled]="!checks[2]">
+      </div>
+      <div class="d-flex">
+        <button type="button" class="btn btn-primary my-2 ml-auto mr-2 col-md-2" (click)="updateSearch()" [disabled]="!queries">Update</button>
+        <button type="button" class="btn btn-primary my-2 mr-auto ml-2 col-md-2" (click)="saveSearch()">Save Search</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="jumbotron" *ngIf="queries.length > 0">
+    <h5>Search Criteria</h5>
+    <ul class="list-group">
+      <li class="list-group-item" *ngIf="queries[0].budget">Budget: {{queries[0].budget}}</li>
+      <li class="list-group-item" *ngIf="queries[0].origin">Origin: {{queries[0].origin}}</li>
+      <li class="list-group-item">
+        Start Date: {{queries[0].startDate}}
+      </li>
+      <li class="list-group-item">
+        End Date: {{queries[0].endDate}}
+      </li>
+      <li class="list-group-item">
+        Location Category: {{queries[0].locationCategory}}
+      </li>
+      <li class="list-group-item">
+        Minimum Distance: {{queries[0].minDistance}}
+      </li>
+      <li class="list-group-item">
+        Maximum Distance: {{queries[0].maxDistance}}
+      </li>
+    </ul>
+  </div>
+</div>
+
+<br>
+<br>
+
+<div class="d-flex justify-content-between col-md-7 mx-auto card-deck" *ngIf="locations.length > 0">
+  <div class="card border-info " *ngFor="let location of locations">
+    <div class=" mt-auto mx-auto mb-0" style="height: 20%">
+      <img class="card-img-top img-fluid" src="/src/images/{{location.imageName}}" alt="Card image cap" style="max-height: 20vh">
+    </div>
+    <div class="card-body">
+      <h4 class="card-title">{{location.name}}</h4>
+      <p class="card-text">{{location.description}}</p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Last updated 3 mins ago</small>
+    </div>
+  </div>
+</div>
