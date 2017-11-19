@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 export class LogoutComponent {
 
-    private logout(){
+    public logout(){
         alert('Success');
     }
 

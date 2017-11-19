@@ -1,6 +1,8 @@
 export class Location{
-    name: string;
+    location_id: number
+    city: string;
+    country: string;
     description: string;
-    imageName: string;
-    category: string;
+    imagePath: string;
+    //category: string;
 }

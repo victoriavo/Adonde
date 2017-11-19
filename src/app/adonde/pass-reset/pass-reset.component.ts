@@ -2,15 +2,15 @@ import { Component, OnInit, Input } from '@angular/core';
 import {User} from '../../domain';
 
 @Component({
-    selector: 'pass-change',
-    templateUrl: './pass-change.component.html',
-    styleUrls: ['./pass-change.component.css']
+    selector: 'pass-reset',
+    templateUrl: './pass-reset.component.html',
+    styleUrls: ['./pass-reset.component.css']
 })
 
-export class PassChangeComponent {
+export class PassResetComponent {
     public newUser = new User();
     
-    public change(){
+    public reset(){
         alert('Success');
     }
 

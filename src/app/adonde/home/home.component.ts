@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'home',
@@ -8,7 +7,4 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class HomeComponent {
 
-  
-  
-  
 }

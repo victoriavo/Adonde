@@ -3,7 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AdondeModule } from './adonde/adonde.module'
 import { RouterModule } from '@angular/router';
-import { HttpModule, JsonpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { LocationRepository, newQueryService } from './domain/index';
+import { FormsModule } from '@angular/forms';
 
 const defaultRoute = '/home';
 
@@ -14,17 +16,22 @@ const defaultRoute = '/home';
         RouterModule.forRoot([
             { path: '', redirectTo: defaultRoute, pathMatch: 'full' }
         ]),
-        HttpModule,
-        JsonpModule
+        HttpClientModule,
+        FormsModule
     ],
     declarations: [ 
         AppComponent 
     ],
     bootstrap: [ 
         AppComponent 
+    ],
+    providers: [
+      LocationRepository,
+      newQueryService
     ]
 })
 
 export class AppModule {
 
 }
+//Done
