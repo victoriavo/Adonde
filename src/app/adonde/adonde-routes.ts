@@ -15,6 +15,7 @@ export const ACCOUNTS_ROUTES : Routes = [
     { path: 'reset', component: PassResetComponent },
     { path: 'home', component: HomeComponent},
     { path: 'searchResults', component: SearchResultsComponent},
-    { path: 'location/:location_id', component: LocationDetailsComponent}
+    { path: 'location/:location_id', component: LocationDetailsComponent},
+    { path: 'logout', component: LogoutComponent }
     
 ];

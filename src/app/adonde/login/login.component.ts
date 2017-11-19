@@ -14,7 +14,7 @@ export class LoginComponent {
 
   ngOnInit(){
     if(localStorage.getItem('email')){
-      
+
     }
   }
   

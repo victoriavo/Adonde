@@ -31,6 +31,13 @@ div {
     font-family: 'Lobster', cursive;
 }
 
-/* h4 {
-    font-family: 'Open Sans', sans-serif;
-} */
+.dropdown-pull-right {
+    float: right !important;
+    right: 0;
+    left: auto;
+}
+  
+.dropdown-pull-right>.dropdown-menu {
+    right: 0;
+    left: auto;
+}
