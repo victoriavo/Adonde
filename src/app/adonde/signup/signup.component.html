@@ -1,0 +1,42 @@
+<bg-animation style="z-index: 0;" class="w-100 h-100 fixed-top"></bg-animation>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-faded justify-content-between">
+        <a class="text-white h4" id="AppName" routerLink="/">Ad‌&#243;nde</a>
+        <div id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="d-inline text-white" routerLink="/">Home
+                        <span class="sr-only"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="d-flex container bg-light flex-column px-5 pb-4 pt-2 col-md-4 rounded mt-4">
+        <h1 class="text-center display-4 mb-3">Sign Up</h1>
+        <div class="container">
+            <div class="form-group">
+                <input type="text" class="form-control lead" id="emailInput" placeholder="Email" [(ngModel)]="newUser.name">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control lead" id="emailConfirm" placeholder="Confirm Email" [(ngModel)]="newUser.email">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control lead" id="passwordInput" placeholder="Password" [(ngModel)]="newUser.password">
+            </div>
+        </div>
+        <div class="checkbox text-center">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="remember" class="custom-control-input" (click)="remember()">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Keep Me Logged In</span>
+            </label>
+        </div>
+        <div class="wrapper text-center pt-3">
+            <!--<button type="button" class="btn btn-primary" (click)="login()">Sign In</button>-->
+            <button type="button" class="btn btn-primary">Sign In</button>
+        </div>
+        <a class="text-center mt-3" routerLink="/login"><small>Return to login</small></a>
+    </div>
+</body>

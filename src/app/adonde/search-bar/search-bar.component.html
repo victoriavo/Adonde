@@ -1,0 +1,54 @@
+<div id="SearchBar" class="d-flex justify-content-between rounded p-3" [ngClass]="bgcolor" (change)="update()" >
+        <form class="form-inline my-auto" [formGroup]="changeData">
+            <div class="form-group mx-3 input-group">
+                <span class="input-group-addon" id="dollarSign">$</span>
+                <input type="number" class="form-control" id="budget" 
+                placeholder="Budget" min="0" step="10" formControlName="budget"
+                name="budget">
+            </div>
+            <div class="form-group mr-3">
+                <input type="text" class="form-control" id="origin" 
+                placeholder="Origin" style="width: 150px;" formControlName="origin"
+                name="origin">
+            </div>
+            <div class="form-group">
+                <input type="date" formControlName="startDate"
+                class="form-control date-picker" id="start-date"
+                [ngClass]="{ 'placeholder': !newQuery.startDate}"
+                onfocus="javascript: $( this ).removeClass('placeholder');" 
+                onblur="javascript: if( !this.value ) $( this ).addClass('placeholder');"
+                placeholder="Start Date"            
+                name="startDate">
+            </div>
+            <div class="form-group">
+                <input type="date" 
+                class="form-control date-picker" id="end-date" formControlName="endDate"
+                [ngClass]="{ 'placeholder': !newQuery.endDate}"
+                onfocus="javascript: $( this ).removeClass('placeholder');" 
+                onblur="javascript: if( !this.value ) $( this ).addClass('placeholder');"
+                placeholder="End Date"            
+                name="endDate">
+            </div>
+            <button type="button" class="btn btn-success ml-3" id="SearchSubmit"
+            routerLink="/searchResults" (click)="passQuery()">Search</button>
+        </form>
+</div>
+<!--<div class="d-flex justify-content-center container rounded bg-secondary">
+    <form class="form-inline m-auto">
+        <div class="form-group">
+            <input type="number" class="form-control" id="budget" placeholder="Budget" min="0" step="10" style="width: 100px;">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="origin" placeholder="Origin" style="width: 150px;">
+        </div>
+        <div class="form-group">
+            <label for="start-date">Start Date: </label>
+            <input type="date" class="form-control" id="start-date">
+        </div>
+        <div class="form-group">
+            <label for="start-date">End Date: </label>
+            <input type="date" class="form-control" id="end-date">
+        </div>
+        <button type="button" class="btn btn-success" routerLink="/searchResults">Search</button>
+    </form>
+</div>-->

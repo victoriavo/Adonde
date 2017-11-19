@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+
+
+#AppName {
+    font-family: 'Lobster', cursive;
+}
+
+#label {
+    font-size: 1.25em;
+}
