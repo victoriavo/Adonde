@@ -16,31 +16,31 @@
     <div class="d-flex container bg-light flex-column px-5 pb-4 pt-2 col-md-4 rounded mt-4">
         <h1 class="text-center display-4 mb-3">Login</h1>
         <div class="container">
-            <div class="form-group">
-                <!-- <label for="username">
-                    <h4 class="text-dark text-center lead">Email address</h4>
-                </label> -->
-                <input type="text" class="form-control lead" id="usernameInput" placeholder="Email" [(ngModel)]="user.email">
-            </div>
-            <div class="form-group">
-                <!-- <label for="password">
-                    <h4 class="text-dark text-center lead">Password</h4>
-                </label> -->
-                <input type="text" class="form-control lead" id="passwordInput" placeholder="Password" [(ngModel)]="user.password">
-            </div>
+            <form [formGroup]="changeData">
+                <div class="form-group">
+                    <input type="text" class="form-control lead" id="emailInput" 
+                           placeholder="Email" formControlName="emailInput">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control lead" id="passwordInput" 
+                           placeholder="Password" formControlName="passwordInput">
+                </div>
+            </form>
         </div>
         <div class="checkbox text-center">
             <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-                <input type="checkbox" id="remember" class="custom-control-input" (click)="remember()">
+                <input type="checkbox" id="remember" class="custom-control-input" (click)="remember()"  [disabled]="!changeData.valid">
                 <span class="custom-control-indicator"></span>
                 <span class="custom-control-description">Keep Me Logged In</span>
             </label>
         </div>
         <div class="wrapper text-center p-3">
             <!--<button type="button" class="btn btn-primary" (click)="login()">Sign In</button>-->
-            <button type="button" class="btn btn-primary">Sign In</button>
+            <button type="button" class="btn btn-primary" [disabled]="!changeData.valid">Sign In</button>
         </div>
-        <a class="text-center text-dark mb-3" routerLink="/reset"><small>Forgot your password?</small></a>
+        <a class="text-center text-dark mb-3" routerLink="/reset">
+            <small>Forgot your password?</small>
+        </a>
         <a class="text-center" href routerLink="/signup">Don't have an account? Click here!</a>
     </div>
 </body>
