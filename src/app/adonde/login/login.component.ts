@@ -14,25 +14,32 @@ export class LoginComponent {
   public user = new User();
   changeData: FormGroup;
   inputs: AbstractControl[] = [null, null];
+  wantRemember: boolean;
 
   constructor(private router : Router, private http: HttpClient){
     this.changeData = new FormGroup({
-      emailInput: new FormControl(null, [Validators.required, Validators.email]),
-      passwordInput: new FormControl(null, [Validators.required, Validators.minLength(8)])
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(8)])
     });
     this.changeData.valueChanges.subscribe(val => this.update(val));
-    this.changeData.statusChanges.subscribe(val => this.update(val));
-}
+
+    this.wantRemember = false;
+  }
 
   
 
   ngOnInit(){
     if(localStorage.getItem('email')){
-
+      this.changeData.get('email').setValue(localStorage.getItem('email'));
     }
   }
   
   private login(){
+
+    if (this.changeData.valid) {
+      this.wantRemember ? localStorage.setItem('email', this.user.email) : localStorage.removeItem('email');
+      // localStorage.setItem('password', this.user.password);
+    }
       this.http.post('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/login',
         {
           email : this.user.email.toString(),
@@ -51,8 +58,7 @@ export class LoginComponent {
   }
 
   private remember() {
-      localStorage.setItem('email', this.user.email);
-      localStorage.setItem('password', this.user.password);
+    this.wantRemember = !this.wantRemember;
   }
 
   public update(user: User) {
