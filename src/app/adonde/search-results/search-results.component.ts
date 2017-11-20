@@ -67,7 +67,6 @@ export class SearchResultsComponent implements OnInit {
       //console.log(this.results);
       //console.log(this.results);
       //this.results = data['city'];
-
       data.forEach(element => {
         this.locations.push(element);
       });
@@ -147,5 +146,3 @@ export class SearchResultsComponent implements OnInit {
     }
   }
 }
-
-

@@ -1,38 +1,38 @@
-<div id="AppName" class="fixed-top">
-    <h1 routerLink="/home" routerLinkActive="active">Ad‌&#243;nde</h1>
-</div>
-<br>
-<div class="container">
-  <div id="PassChangeName">
+<bg-animation style="z-index: 0;" class="w-100 h-100 fixed-top"></bg-animation>
 
-    <h1>
-      Change Your Password
-    </h1>
-
-    <div class="form-group">
-      <label id="label" class="col-form-label lead" for="currentPass">
-        Old Password
-      </label>
-      <input type="password" class="form-control" id="currentPass">
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-faded justify-content-between">
+    <a class="text-white h4" id="AppName" routerLink="/">Ad‌&#243;nde</a>
+    <div id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="d-inline text-white" routerLink="/">Home
+            <span class="sr-only"></span>
+          </a>
+        </li>
+      </ul>
     </div>
-
-    <div class="form-group">
-      <label id="label" class="col-form-label lead" for="newPass1">
-        New Password
-      </label>
-      <input type="password" class="form-control" id="newPass1">
+  </nav>
+  <div class="d-flex container bg-light flex-column px-5 pb-4 pt-2 col-md-3 rounded mt-4">
+    <h1 class="text-center display-4 mb-3">Password Change</h1>
+    <div class="container">
+      <form [formGroup]="changeData">
+        <div class="form-group">
+          <input type="password" class="form-control lead" id="oldPass" placeholder="Old Password" formControlName="oldpass">
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control lead" id="newPass" placeholder="New Password" formControlName="newpass">
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control lead" id="repeatPass" placeholder="Confirm New Password" formControlName="renpass">
+        </div>
+      </form>
     </div>
-
-    <div class="form-group">
-      <label id="label" class="col-form-label lead" for="newPass2">
-        Comfirm New Password
-      </label>
-      <input type="password" class="form-control" id="newPass2">
+    <div class="wrapper text-center pt-3">
+      <button type="button" class="btn btn-primary" (click)="change()" [disabled]="!changeData.valid">Change</button>
     </div>
-
-    <button type="button" class="btn btn-primary" (click)="change()">
-      Submit
-    </button>
-
+    <a class="text-center mt-3" routerLink="/login">
+      <small>Return to login</small>
+    </a>
   </div>
-</div>
+</body>

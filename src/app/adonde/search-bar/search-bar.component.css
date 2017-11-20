@@ -1,4 +1,4 @@
-.date-picker.placeholder::before{
+date-picker.placeholder::before{
     width:100%;    
     color: #888888;
     content:attr(placeholder);
@@ -6,4 +6,12 @@
 
 .date-picker{
     width:15rem;
+}
+
+button:hover:enabled {
+    cursor: pointer;
+}
+
+.display-4:hover {
+    cursor: default;
 }
