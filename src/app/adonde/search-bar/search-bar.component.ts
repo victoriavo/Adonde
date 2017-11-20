@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angu
 import { Query, newQueryService } from '../../domain'
 import { FormControl, ReactiveFormsModule, FormGroup } from '@angular/forms';
 
+declare var $: any;
+
 @Component({
   selector: 'search-bar',
   templateUrl: './search-bar.component.html',
@@ -11,13 +13,13 @@ export class SearchBarComponent {
   public newQuery = new Query;
   changeData: FormGroup;
   @Input() bgcolor: string;
-  
+
   @Output() queryUpdated = new EventEmitter();
 
-  public success : 0;
-  
-  constructor(qService: newQueryService){
-    this.changeData = new FormGroup ({
+  public success: 0;
+
+  constructor(qService: newQueryService) {
+    this.changeData = new FormGroup({
       budget: new FormControl(qService.sharedQuery.budget),
       origin: new FormControl(qService.sharedQuery.origin),
       startDate: new FormControl(qService.sharedQuery.startDate),
@@ -27,7 +29,7 @@ export class SearchBarComponent {
 
     //SUBSCRIBE TO SERVICE AND SERVICE SUBSCRIBE TO IT    
     qService.queryChanged.subscribe((newValue: Query) => this.newQuery = newValue);
-    this.changeData.valueChanges.subscribe(val => qService.changeQuery(val));    
+    this.changeData.valueChanges.subscribe(val => qService.changeQuery(val));
   }
 
   ngOnChanges() {
@@ -40,4 +42,6 @@ export class SearchBarComponent {
   passQuery() {
 
   }
+
+
 }

@@ -8,6 +8,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { PassChangeComponent } from './pass-change/pass-change.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
@@ -29,6 +30,7 @@ import { bgAnimationComponent } from './bg-animation/bg-animation.component';
         SignupComponent,
         LoginComponent,
         HomeComponent,
+        NavbarComponent,
         PassChangeComponent,
         PassResetComponent,
         SearchBarComponent,

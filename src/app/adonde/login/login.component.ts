@@ -13,7 +13,6 @@ import { AbstractControl } from '@angular/forms/src/model';
 export class LoginComponent {
   public user = new User();
   changeData: FormGroup;
-  inputs: AbstractControl[] = [null, null];
   wantRemember: boolean;
 
   constructor(private http: HttpClient) {

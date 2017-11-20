@@ -33,3 +33,11 @@ div {
     border-color: #80bdff;
     box-shadow: none;
 }
+
+button:hover:enabled {
+    cursor: pointer;
+}
+
+.display-4:hover {
+    cursor: default;
+}

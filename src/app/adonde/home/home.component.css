@@ -24,13 +24,36 @@ h4 {
 div {
     z-index: 5;
 }
-  
-
 
 #appName {
     font-family: 'Lobster', cursive;
 }
 
-/* h4 {
-    font-family: 'Open Sans', sans-serif;
-} */
+.dropdown-pull-right {
+    float: right !important;
+    right: 0;
+    left: auto;
+}
+  
+.dropdown-pull-right>.dropdown-menu {
+    right: 0;
+    left: auto;
+}
+
+#AppName {
+    cursor: default;
+}
+
+h4 {
+    z-index: 6;
+    opacity: 1;
+}
+
+.bg {
+    margin-top: -3.9rem;
+    width: 32.5rem;
+    height: 3.75rem;
+    background-color:black;
+    z-index:5;
+    opacity:0.5;
+}

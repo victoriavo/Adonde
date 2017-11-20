@@ -7,3 +7,11 @@
 .date-picker{
     width:15rem;
 }
+
+button:hover:enabled {
+    cursor: pointer;
+}
+
+.display-4:hover {
+    cursor: default;
+}
