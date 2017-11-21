@@ -17,6 +17,7 @@ import { PassResetComponent } from './pass-reset/pass-reset.component';
 import { bgAnimationComponent } from './bg-animation/bg-animation.component';
 import { EditAccountComponent } from './edit-account/edit-account.component';
 import { DeleteComponent } from './delete/delete.component';
+import { SavedComponent } from './saved/saved.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { DeleteComponent } from './delete/delete.component';
         LocationDetailsComponent,
         bgAnimationComponent,
         EditAccountComponent,
-        DeleteComponent
+        DeleteComponent,
+        SavedComponent
     ],
     exports: [
         

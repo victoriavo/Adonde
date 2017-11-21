@@ -15,6 +15,7 @@ export class EditAccountComponent {
     public name:string;
     public email:string;
     changeData: FormGroup;
+    public edited:boolean;
 
     constructor(private router: Router, private http: HttpClient){
         this.changeData = new FormGroup({
@@ -53,9 +54,9 @@ export class EditAccountComponent {
             email: this.email.toString()
         }).subscribe(data => {console.log(data);
             if(data['valid'] == 1){
-
+                this.router.navigate(['/']);
             }else{
-
+                this.edited = false;
             }
         });
     }

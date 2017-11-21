@@ -14,6 +14,7 @@ import { AbstractControl } from '@angular/forms/src/model';
 export class SignupComponent {
   public newUser = new User();
   changeData: FormGroup;
+  public success: boolean = true;
 
   constructor(private router: Router, private http: HttpClient) {
     this.changeData = new FormGroup({
@@ -33,11 +34,11 @@ export class SignupComponent {
         email: this.newUser.email.toString(),
         password: this.newUser.password.toString()
       }
-    ).subscribe(data => {
-      console.log(data);
+    ).subscribe(data => {console.log(data);
       if (data['valid'] == 0) {
-        alert('Something went wrong');
+        this.success = false;
       } else {
+        this.success = true;
         alert('Success');
         this.router.navigate(['/login']);
       }

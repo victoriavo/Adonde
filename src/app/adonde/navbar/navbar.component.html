@@ -4,11 +4,11 @@
                 <ul class="navbar-nav" [hidden]="!loggedIn">
                     <li class="nav-item dropdown dropdown-pull-right">
                             <a class="nav-link dropdown-toggle" [ngClass]="textcolor" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Account
+                                Hi, {{this.name}}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" routerLink="/edit">Edit my Account</a>
-                                <a class="dropdown-item"routerLink="/">My Places</a>
+                                <a class="dropdown-item"routerLink="/saved">My Places</a>
                                 <div class="dropdown-divider"></div>
                                 <logout></logout>
                             </div>

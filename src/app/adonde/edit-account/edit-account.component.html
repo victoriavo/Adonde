@@ -3,6 +3,9 @@
 
 <div class="d-flex container bg-light flex-column px-5 pb-4 pt-2 col-md-3 rounded mt-4">
     <h1 class="text-center display-4 mb-3">Edit Account</h1>
+    <div class="alert alert-danger" [hidden]="!edited" role="alert">
+            Sorry- we were unable to edit your account.
+    </div>
     <div class="container">
         <form [formGroup]="changeData">
             <div class="form-group">
@@ -17,8 +20,8 @@
     <div class="wrapper text-center p-3">
         <button type="button" class="btn btn-primary" [disabled]="eitherValid()" (click)="edit()">Save Changes</button>
     </div>
-    <a class="text-center text-dark mb-3" routerLink="/reset">
-        <small>Reset Password</small>
+    <a class="text-center text-dark mb-3" routerLink="/change">
+        <small>Change Password</small>
     </a>
     <a class="text-center text-danger mb-3" routerLink="/delete">
         <small>Delete Account</small>

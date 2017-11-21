@@ -9,6 +9,8 @@ import { bgAnimationComponent } from "./bg-animation/bg-animation.component";
 import { PassResetComponent } from "./pass-reset/pass-reset.component";
 import { EditAccountComponent } from "./edit-account/edit-account.component";
 import { DeleteComponent } from "./delete/delete.component";
+import { SavedComponent } from "./saved/saved.component";
+import { PassChangeComponent } from "./pass-change/pass-change.component";
 
 export const ACCOUNTS_ROUTES : Routes = [
     { path: '', component: HomeComponent},
@@ -19,6 +21,8 @@ export const ACCOUNTS_ROUTES : Routes = [
     { path: 'searchResults', component: SearchResultsComponent},
     { path: 'location/:location_id', component: LocationDetailsComponent},
     { path: 'edit', component: EditAccountComponent},
-    { path: 'delete', component: DeleteComponent}
+    { path: 'delete', component: DeleteComponent},
+    { path: 'saved', component: SavedComponent },
+    { path: 'change', component: PassChangeComponent}
     
 ];

@@ -15,6 +15,7 @@ export class LoginComponent {
   public user = new User();
   changeData: FormGroup;
   wantRemember: boolean;
+  public loggedIn: boolean = true;
 
   constructor(private router: Router, private http: HttpClient) {
     this.changeData = new FormGroup({
@@ -45,15 +46,14 @@ export class LoginComponent {
       }
     ).subscribe(data => {
       console.log(data);
-      if (data['session_id'] == 401) {
-        alert('Wrong email or password');
-      } else {
+      if (data['session_id'] != 401) {
         localStorage.setItem('session_id', data['session_id']);
         this.router.navigate(['/']);
+      }else {
+        this.loggedIn = false;
+        console.log("didn't work");
       }
-    },
-      err => console.error(err),
-      () => console.log('done loading'));
+    });
   }
 
   private remember() {

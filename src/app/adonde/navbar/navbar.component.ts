@@ -10,18 +10,20 @@ import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 export class NavbarComponent {
 
 public loggedIn:boolean;
+public name:string;
 
     @Input() textcolor: string;
 
     constructor(private router: Router, private http: HttpClient) {}
 
     ngOnInit(){
-        if(localStorage.getItem('session_id') !== null){
+        if(localStorage.getItem('session_id') !== null && localStorage.getItem('session_id') != '0'){
             console.log(localStorage.getItem('session_id'));
             this.http.get('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/session/' + localStorage.getItem('session_id')
             ).subscribe(data => { console.log(data)
                 if(data['valid'] == 1){
                     this.loggedIn = true;
+                    this.name = data['name'];
                 }else{
                     this.loggedIn = false;
                     localStorage.removeItem('session_id');

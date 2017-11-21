@@ -3,6 +3,7 @@ import { User } from '../../domain';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormControl, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { AbstractControl } from '@angular/forms/src/model';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'pass-change',
@@ -16,8 +17,9 @@ export class PassChangeComponent {
     newpass: string;
     renpass: string;
     changeData: FormGroup;
+    public changed: boolean;
 
-    constructor(private http: HttpClient) {
+    constructor(private router: Router, private http: HttpClient) {
         this.changeData = new FormGroup({
             oldpass: new FormControl(null, [Validators.required, Validators.minLength(8)]),
             newpass: new FormControl(null, [Validators.required, Validators.minLength(8)]),
@@ -27,8 +29,21 @@ export class PassChangeComponent {
         this.changeData.valueChanges.subscribe(val => this.update(val));
     }
 
-    public reset() {
-        alert('Success');
+    public change() {
+        this.http.put('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/update',
+        {
+          session_id: localStorage.getItem('session_id'),
+          old_password: this.oldpass,
+          new_password: this.newpass
+        }
+      ).subscribe(data => {console.log(data);
+        if (data['valid'] == 1) {
+            this.router.navigate(['/edit']);
+        }else {
+          this.changed = false;
+          console.log("didn't work");
+        }
+      });
     }
 
     public update(val: any) {
