@@ -16,6 +16,7 @@ import { LocationDetailsComponent } from './location-details/location-details.co
 import { PassResetComponent } from './pass-reset/pass-reset.component';
 import { bgAnimationComponent } from './bg-animation/bg-animation.component';
 import { EditAccountComponent } from './edit-account/edit-account.component';
+import { DeleteComponent } from './delete/delete.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { EditAccountComponent } from './edit-account/edit-account.component';
         SearchResultsComponent,
         LocationDetailsComponent,
         bgAnimationComponent,
-        EditAccountComponent
+        EditAccountComponent,
+        DeleteComponent
     ],
     exports: [
         

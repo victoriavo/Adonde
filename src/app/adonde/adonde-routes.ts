@@ -8,6 +8,7 @@ import { LocationDetailsComponent } from "./location-details/location-details.co
 import { bgAnimationComponent } from "./bg-animation/bg-animation.component";
 import { PassResetComponent } from "./pass-reset/pass-reset.component";
 import { EditAccountComponent } from "./edit-account/edit-account.component";
+import { DeleteComponent } from "./delete/delete.component";
 
 export const ACCOUNTS_ROUTES : Routes = [
     { path: '', component: HomeComponent},
@@ -17,6 +18,7 @@ export const ACCOUNTS_ROUTES : Routes = [
     { path: 'home', component: HomeComponent},
     { path: 'searchResults', component: SearchResultsComponent},
     { path: 'location/:location_id', component: LocationDetailsComponent},
-    { path: 'edit', component: EditAccountComponent}
+    { path: 'edit', component: EditAccountComponent},
+    { path: 'delete', component: DeleteComponent}
     
 ];
