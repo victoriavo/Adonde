@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'logout',
@@ -10,17 +11,17 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 export class LogoutComponent {
 
 
-    constructor(private http: HttpClient){}
+    constructor(private router: Router, private http: HttpClient){}
 
     public logout(){
         this.http.post('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/logout',
         {
-          session_id : localStorage.getItem('session_id').toString()
+          session_id: localStorage.getItem('session_id')
         }
       ).subscribe(data => console.log(data));
 
       localStorage.removeItem('session_id');
-
+      this.router.navigate(['/login']);
     }
 
 }
