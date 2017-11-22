@@ -28,6 +28,8 @@ export class SearchResultsComponent implements OnInit {
   changeData: FormGroup;
   private optionalFields = ['locationCategory', 'minDistance', 'maxDistance'];
   private hiddenArray: boolean[];
+  public savedArray: boolean[];
+  public loggedIn: boolean;
 
   @Input()
   public query = this.newQuery;
@@ -72,6 +74,7 @@ export class SearchResultsComponent implements OnInit {
       });
 
       this.hiddenArray = Array(this.locations.length).fill(true);
+      this.savedArray = Array(this.locations.length).fill(false);
 
     });
 
@@ -82,6 +85,22 @@ export class SearchResultsComponent implements OnInit {
     this.select = document.getElementById('locationCategory') as HTMLSelectElement;
     this.advancedShowing = false;
     this.dropdownColor = "text-muted";
+
+    if(localStorage.getItem('session_id') !== null && localStorage.getItem('session_id') != '0'){
+      console.log(localStorage.getItem('session_id'));
+      this.http.get('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/session/' + localStorage.getItem('session_id')
+      ).subscribe(data => { console.log(data)
+          if(data['valid'] == 1){
+              this.loggedIn = true;
+          }else{
+              this.loggedIn = false;
+              localStorage.removeItem('session_id');
+          }
+      });
+    }else{
+      this.loggedIn = false;
+      console.log('not logged in');
+    }
   }
 
   public ngAfterContentInit() {
@@ -144,5 +163,52 @@ export class SearchResultsComponent implements OnInit {
       });
     return true;
     }
+  }
+
+  private save(location: number){
+    this.savedArray[location] = true;
+    this.http.post('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/account/location/save',
+    {
+      session_id: localStorage.getItem('session_id'),
+      location_id: location
+    }).subscribe(data => {console.log(data);
+      if (data['valid'] == 1) {
+        this.savedArray[location] = true;
+      } else {
+        this.savedArray[location] = false;
+        console.log('didnt work');
+      }
+    });
+  }
+
+  private unsave(location: number){
+    this.http.delete('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/account/deletesavedlocation/' + localStorage.getItem('session_id') + '/' + location
+    ).subscribe(data => {console.log(data);
+      if (data['valid'] == 1) {
+        this.savedArray[location] = false;
+      } else {
+        this.savedArray[location] = true;
+        console.log('didnt work');
+      }
+    });
+  }
+
+  private isSaved(location: number){
+    this.http.post('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/account/getsavedlocations',
+    {
+      session_id: localStorage.getItem('session_id')
+    }).subscribe(data => {console.log(data);
+        if (data['valid'] == 1) {
+          if(data['locations'].find((item: any) => item.id == location) != null){
+              return true;
+          }else{
+            return false;
+          }
+        }else {
+            console.log("didn't work");
+            return false;
+        }
+    });
+    return false;
   }
 }

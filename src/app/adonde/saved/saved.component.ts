@@ -12,6 +12,7 @@ export class SavedComponent {
     public loggedIn:boolean;
     public name:string;
     public noSaved:boolean;
+    locations: Location[] = [];
 
     constructor(private router: Router, private http: HttpClient){}
 
@@ -21,13 +22,16 @@ export class SavedComponent {
             ).subscribe(data => { console.log(data)
                 if(data['valid'] == 1){
                     this.loggedIn = true;
-                    this.http.post('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/account/getsavedlocations',
+                    this.http.post('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/account/location/save/get',
                     {
                       session_id: localStorage.getItem('session_id')
                     }).subscribe(data => {console.log(data);
                         if (data['valid'] == 1) {
                             this.noSaved = false;
                             console.log("worked");
+                            data['locations'].array.forEach((element: any) => {
+                                this.locations.push(element);
+                            });
                         }else {
                             this.noSaved = true;
                             console.log("didn't work");

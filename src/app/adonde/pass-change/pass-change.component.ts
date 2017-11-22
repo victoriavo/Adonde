@@ -30,7 +30,7 @@ export class PassChangeComponent {
     }
 
     public change() {
-        this.http.put('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/update',
+        this.http.put('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/updatepassword',
         {
           session_id: localStorage.getItem('session_id'),
           old_password: this.oldpass,

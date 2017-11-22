@@ -84,7 +84,9 @@
         <p class="card-text" style="height:50%; overflow: hidden">{{location.description}}</p>
         <br>
         <div class="clearfix">
-          <p class="float-left" style="" >...</p>
+          <a tabindex="0" class="btn btn-success cursor-pointer" [hidden]="!loggedIn || savedArray[i]" role="button" data-toggle="popover" data-trigger="focus" title="Why" data-content="what" (click)="save(location.id)">Save</a>
+          <!--*ngIf="!isSaved(location.id)"-->
+          <a tabindex="0" class="btn btn-danger cursor-pointer" [hidden]="!loggedIn || !savedArray[i]" role="button" data-toggle="popover" data-trigger="focus" title="Why" data-content="what" (click)="unsave(location.id)">Unsave</a>
           <a tabindex="0" class="btn btn-info float-right cursor-pointer" role="button" data-toggle="popover" data-trigger="focus" title="Why" data-content="what">Quick View</a>
         </div>  
       </div>
