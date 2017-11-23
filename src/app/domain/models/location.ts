@@ -4,5 +4,6 @@ export class Location{
     country: string;
     description: string;
     imagePath: string;
+    
     //category: string;
 }

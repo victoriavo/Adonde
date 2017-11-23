@@ -5,26 +5,22 @@
             Saved Searches
           </h1>
         </div>
-        <div class="alert alert-warning" [hidden]="noSaved" role="alert">
+        <div class="alert alert-warning" [hidden]="!noSaved" role="alert">
                 You have no saved searches.
         </div>
-</div>
 
 <div class="row" *ngIf="locations">
-        <div class="card border-info m-4" *ngFor="let location of locations; let i = index" [hidden]="!hiddenArray[i]">
-          <button type="button" class="close mr-1 cursor-pointer" aria-label="Close" 
-                  style="position:absolute; right: 0; z-index: 1"
-                  (click) = "removeFromView(i)">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <div class="card border-info m-4" *ngFor="let location of locations; let i = index">
+          
+          
           <img class="card-img-top" src="{{location.imagePath}}" alt="Card image cap" style="height:40%; position:relative">
           <div class="card-body" style="height:50%; position:relative">
             <h4 class="card-title">{{location.city}}</h4>
             <p class="card-text" style="height:50%; overflow: hidden">{{location.description}}</p>
             <br>
             <div class="clearfix">
-              <p class="float-left" style="" >...</p>
-              <a tabindex="0" class="btn btn-info float-right cursor-pointer" role="button" data-toggle="popover" data-trigger="focus" title="Why" data-content="what">Quick View</a>
+              <a tabindex="0" class="btn btn-danger cursor-pointer" role="button" data-toggle="popover" data-trigger="focus" title="Why" data-content="what" (click)="unsave(location.location_id)">Unsave</a>
+              <a tabindex="0" class="btn btn-info float-right cursor-pointer" role="button" data-toggle="popover" data-trigger="focus" title="Why" data-content="what" [routerLink]="['/locations', location.location_id]">View Details</a>
             </div>  
           </div>
           <div class="card-footer d-flex">
@@ -34,3 +30,4 @@
           </div>
         </div>
       </div>  
+</div>

@@ -69,6 +69,7 @@ export class SearchResultsComponent implements OnInit {
       //console.log(this.results);
       //console.log(this.results);
       //this.results = data['city'];
+      console.log(data);
       data.forEach(element => {
         this.locations.push(element);
       });
@@ -166,7 +167,6 @@ export class SearchResultsComponent implements OnInit {
   }
 
   private save(location: number){
-    this.savedArray[location] = true;
     this.http.post('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/account/location/save',
     {
       session_id: localStorage.getItem('session_id'),
@@ -193,22 +193,4 @@ export class SearchResultsComponent implements OnInit {
     });
   }
 
-  private isSaved(location: number){
-    this.http.post('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/account/getsavedlocations',
-    {
-      session_id: localStorage.getItem('session_id')
-    }).subscribe(data => {console.log(data);
-        if (data['valid'] == 1) {
-          if(data['locations'].find((item: any) => item.id == location) != null){
-              return true;
-          }else{
-            return false;
-          }
-        }else {
-            console.log("didn't work");
-            return false;
-        }
-    });
-    return false;
-  }
 }

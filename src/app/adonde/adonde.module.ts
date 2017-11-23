@@ -18,6 +18,7 @@ import { bgAnimationComponent } from './bg-animation/bg-animation.component';
 import { EditAccountComponent } from './edit-account/edit-account.component';
 import { DeleteComponent } from './delete/delete.component';
 import { SavedComponent } from './saved/saved.component';
+import { WeatherComponent } from './weather/weather.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { SavedComponent } from './saved/saved.component';
         bgAnimationComponent,
         EditAccountComponent,
         DeleteComponent,
-        SavedComponent
+        SavedComponent,
+        WeatherComponent
     ],
     exports: [
         
