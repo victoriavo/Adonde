@@ -30,10 +30,15 @@ export class SavedComponent {
                         for(var i = 0; i < data['locations'].length; i++){
                             this.locations.push(data['locations'][i]);
                         }
-                    this.noSaved = false;
+                        if(this.locations.length == 0){
+                            this.noSaved = true;
+                        }else{
+                            this.noSaved = false;
+                        }
                 });
                 }else{
                     this.loggedIn = false;
+                    this.noSaved = true;
                     localStorage.removeItem('session_id');
                     this.router.navigate(['/']);
                 }
