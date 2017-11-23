@@ -12,6 +12,7 @@ import { DeleteComponent } from "./delete/delete.component";
 import { SavedComponent } from "./saved/saved.component";
 import { PassChangeComponent } from "./pass-change/pass-change.component";
 import { WeatherComponent } from "./weather/weather.component";
+import { FlightsComponent } from './flights/flights.component';
 
 export const ACCOUNTS_ROUTES : Routes = [
     { path: '', component: HomeComponent},
@@ -21,6 +22,7 @@ export const ACCOUNTS_ROUTES : Routes = [
     { path: 'home', component: HomeComponent},
     { path: 'searchResults', component: SearchResultsComponent},
     { path: 'locations/:location_id', component: LocationDetailsComponent},
+    { path: 'locations/:location_id/:flights', component: FlightsComponent, data : {location_id : ':location_id'}},
     { path: 'edit', component: EditAccountComponent},
     { path: 'delete', component: DeleteComponent},
     { path: 'saved', component: SavedComponent },
