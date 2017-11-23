@@ -1,3 +1,11 @@
-<h4><span class="badge badge-warning">Weather
-        <span class="badge badge-light">84</span>
-    </span></h4>
+<div class="card border-warning" style="width: 15rem;">
+        <div class="card-header text-white font-weight-bold">
+          Current Weather
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Temperature <span class="badge badge-info float-right">{{this.temperature}} &#176;F</span></li>
+          <li class="list-group-item">Humidity <span class="badge badge-info float-right">{{this.humidity}} %</span></li>
+          <li class="list-group-item">Description <span class="badge badge-info float-right">{{this.description}}</span></li>
+          <li class="list-group-item">Wind Speed <span class="badge badge-info float-right">{{this.wind}}</span></li>
+        </ul>
+</div>

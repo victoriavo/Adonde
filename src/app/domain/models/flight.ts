@@ -1,4 +1,4 @@
-import { Time } from '@angular/common';
+//import { Time } from '@angular/common';
 
 export class Flight{
     origin: string;
@@ -8,7 +8,7 @@ export class Flight{
     airlines: string;
     depart_port: string;
     arrival_port: string;
-    air_time: Time;
+    //air_time: Time;
     distance: number;
     link: string;
 }

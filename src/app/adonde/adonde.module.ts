@@ -20,6 +20,7 @@ import { DeleteComponent } from './delete/delete.component';
 import { SavedComponent } from './saved/saved.component';
 import { WeatherComponent } from './weather/weather.component';
 import { FlightsComponent } from './flights/flights.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { FlightsComponent } from './flights/flights.component';
         DeleteComponent,
         SavedComponent,
         WeatherComponent,
-        FlightsComponent
+        FlightsComponent,
+        AboutUsComponent
     ],
     exports: [
         
