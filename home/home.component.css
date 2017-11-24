@@ -1,0 +1,63 @@
+/*@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+
+body {
+    background-image: url("https://s2.starladder.com/uploads/ckeditor/elfinder/WESG%202017/announcement/Barcelona-2.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+
+h1 {
+    font-size: 7em;
+    font-family: 'Lobster', cursive;
+}
+
+h4 {
+    font-family: 'Open Sans', sans-serif;
+}
+
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+
+div {
+    z-index: 5;
+}
+
+#appName {
+    font-family: 'Lobster', cursive;
+}
+
+.dropdown-pull-right {
+    float: right !important;
+    right: 0;
+    left: auto;
+}
+  
+.dropdown-pull-right>.dropdown-menu {
+    right: 0;
+    left: auto;
+}
+
+#AppName {
+    cursor: default;
+}
+
+h4 {
+    z-index: 6;
+    opacity: 1;
+}
+
+.bg {
+    margin-top: -3.9rem;
+    width: 32.5rem;
+    height: 3.75rem;
+    background-color:black;
+    z-index:5;
+    opacity:0.5;
+}
+
+.w-100 {
+    height: 97vh;
+}
