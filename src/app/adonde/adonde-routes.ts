@@ -29,6 +29,6 @@ export const ACCOUNTS_ROUTES : Routes = [
     { path: 'saved', component: SavedComponent },
     { path: 'change', component: PassChangeComponent},
     { path: 'weather/:location_id', component: WeatherComponent},
-    { path: 'aboutus', component: AboutUsComponent }
+    { path: 'about', component: AboutUsComponent }
     
 ];

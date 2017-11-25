@@ -21,6 +21,7 @@ import { SavedComponent } from './saved/saved.component';
 import { WeatherComponent } from './weather/weather.component';
 import { FlightsComponent } from './flights/flights.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { AboutUsComponent } from './about-us/about-us.component';
         SavedComponent,
         WeatherComponent,
         FlightsComponent,
-        AboutUsComponent
+        AboutUsComponent,
+        FooterComponent
     ],
     exports: [
         
