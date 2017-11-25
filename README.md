@@ -14,3 +14,7 @@ Responsibilities:
 -Sign Up (POST)
 -Search Results show locations (GET)
 -Location Page
+-Flights Component
+-Ratings Component
+-Filtered Locations based on Attributes
+-Compiled and created AngularCLI project to convert our Angular project for server deployment
