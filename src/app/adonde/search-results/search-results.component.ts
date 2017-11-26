@@ -24,11 +24,12 @@ export class SearchResultsComponent implements OnInit {
   public results: string;
   public advancedShowing: boolean;
   public checks: boolean[] = [false, false, false];
-  public dropdownColor: string;
+  public dropdownColors: string[] = ['',''];
   public minmaxColor: string[] = ['text-muted', 'text-muted'];
   public select: HTMLSelectElement;
+  public select2: HTMLSelectElement;
   changeData: FormGroup;
-  public optionalFields = ['locationCategory', 'minDistance', 'maxDistance'];
+  public optionalFields = ['locationCategory', 'minDistance', 'maxDistance', 'minRating'];
   public hiddenArray: boolean[];
   public locationIndex: number;
   public savedArray: boolean[];
@@ -55,7 +56,8 @@ export class SearchResultsComponent implements OnInit {
       endDate: new FormControl(qService.sharedQuery.endDate),
       locationCategory: new FormControl({ value: qService.sharedQuery.locationCategory, disabled: true }),
       minDistance: new FormControl({ value: qService.sharedQuery.minDistance, disabled: true }),
-      maxDistance: new FormControl({ value: qService.sharedQuery.maxDistance, disabled: true })
+      maxDistance: new FormControl({ value: qService.sharedQuery.maxDistance, disabled: true }),
+      minRating: new FormControl({ value: qService.sharedQuery.minRating, disabled: true })
     });
     this.newQuery = qService.sharedQuery;
     if (!qService.isNull())
@@ -91,8 +93,9 @@ export class SearchResultsComponent implements OnInit {
 
   public ngOnInit() {
     this.select = document.getElementById('locationCategory') as HTMLSelectElement;
+    this.select2 = document.getElementById('minRating') as HTMLSelectElement;
     this.advancedShowing = false;
-    this.dropdownColor = "text-muted";
+    this.dropdownColors.fill("text-muted");
 
     if (localStorage.getItem('session_id') !== null && localStorage.getItem('session_id') != '0') {
       console.log(localStorage.getItem('session_id'));
@@ -130,7 +133,8 @@ export class SearchResultsComponent implements OnInit {
       !this.queries[this.queries.length - 1].origin &&
       !this.queries[this.queries.length - 1].minDistance &&
       !this.queries[this.queries.length - 1].maxDistance &&
-      !this.queries[this.queries.length - 1].locationCategory) {
+      !this.queries[this.queries.length - 1].locationCategory &&
+      !this.queries[this.queries.length - 1].minRating) {
       this.showAll();
     }
     else {
@@ -157,12 +161,20 @@ export class SearchResultsComponent implements OnInit {
     this.advancedShowing = !this.advancedShowing;
   }
 
-  public dropdownChange() {
-    let control = this.changeData.get(this.optionalFields[0]);
-    if (control.enabled)
-      (this.select.selectedIndex > 0) ? this.dropdownColor = "text-dark" : this.dropdownColor = "text-secondary";
-    else
-      this.dropdownColor = "text-secondary";
+  public dropdownChange(x: number) {
+    if (x == 0) {
+      let control = this.changeData.get(this.optionalFields[0]);
+      if (control.enabled)
+        (this.select.selectedIndex > 0) ? this.dropdownColors[x] = "text-dark" : this.dropdownColors[x] = "text-secondary";
+      else
+        this.dropdownColors[x] = "text-secondary";
+    } else {
+      let control = this.changeData.get(this.optionalFields[3]);
+      if (control.enabled)
+        (this.select2.selectedIndex > 0) ? this.dropdownColors[x] = "text-dark" : this.dropdownColors[x] = "text-secondary";
+      else
+        this.dropdownColors[x] = "text-secondary";
+    }
 
   }
 
@@ -173,7 +185,7 @@ export class SearchResultsComponent implements OnInit {
   public check(x: number) {
     let control = this.changeData.get(this.optionalFields[x]);
     control.disabled ? control.enable() : control.disable();
-    this.dropdownChange();
+    x == 0 ? this.dropdownChange(0) : this.dropdownChange(1);
     this.minmaxChange(control, x);
   }
 

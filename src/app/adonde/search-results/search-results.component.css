@@ -32,3 +32,7 @@
 .custom-checkbox:hover {
     cursor: pointer;
 }
+
+.ratingOption:after {
+    content: "\2605";
+}
