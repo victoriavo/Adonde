@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css?family=Lobster');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
-body {
-    background-image: url("https://s2.starladder.com/uploads/ckeditor/elfinder/WESG%202017/announcement/Barcelona-2.jpg");
-    background-repeat: no-repeat;
-    background-size:cover;
+#LocationName{
+    padding: 5% 0 0 0%;
+    font-size: 60px;
+    color: #000;
+    /* font-family: 'Merriweather', serif; */
 }
 
-h4 {
-    font-family: 'Lobster', cursive;
-}
+.material-icons{ font-size: 12px; }
 

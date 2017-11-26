@@ -23,6 +23,12 @@ export class newQueryService {
     }
 
     changeQuery(newData: Query){
+        for (var property in newData){
+            !property && (property = null);
+        }
+        !newData.locationCategory && (newData.locationCategory = null);
+        !newData.minDistance && (newData.minDistance = null);
+        !newData.maxDistance && (newData.maxDistance = null);
         this.sharedQuery = newData;
         this.queryChanged.emit(this.sharedQuery);
     }

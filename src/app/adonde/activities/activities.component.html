@@ -1,0 +1,24 @@
+<div class="card mb-3" id="no-activities" *ngIf="!activities.length">
+        <div class="card-block bg-light p-3">
+            <p id="no-activities-message">Sorry, there are no activities to show!</p>
+        </div>    
+        </div>      
+        
+    <div class="container" id="activities" *ngIf="activities.length">
+        <div class="list-group" style="width:100%">
+            <!--<li class="list-group-item list-group-item-action list-group-item"
+            *ngFor="let activity of activities">{{activity.name}}</li>-->
+            <div class="container" *ngFor="let activity of activities; let i = index" style="width:100%">
+                <button type="button" class="btn btn-light dropdown-toggle mb-3"
+                data-toggle="dropdown" 
+                id="dropdownInfoButton{{i}}"
+                aria-haspopup="true" aria-expanded="false"
+                style="width:100%"
+                >{{activity.name}}</button>
+                <div class="dropdown-menu p-3" aria-labelledby="dropdownInfoButton">
+                        <p>{{activity.description}}</p>
+                </div>
+            </div>  
+        </div>
+    </div>    
+        

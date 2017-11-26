@@ -1,0 +1,61 @@
+<div id="undefined-ratings" *ngIf="!ratings.length">
+        <div class="mb-2">
+            <h2 class="d-inline">Ratings</h2>
+            <h2 class="text-muted d-inline">(0)</h2>
+        </div>    
+        <div class="card mb-3" id="no-ratings">
+            <div class="card-block bg-light p-3">
+                <p id="no-rating-message">Be the first to add a rating!</p>
+            </div>    
+        </div>       
+    </div>
+    <div id="defined-ratings" *ngIf="ratings.length > 0">
+        <div class="mb-2">
+            <h2 class="d-inline">Ratings</h2>
+            <h2 class="text-muted d-inline">(<h2 class="text-muted d-inline">{{ratings.length}}</h2>)</h2>
+        </div>    
+        <div class="card mb-3" id="Individual-rating" *ngFor="let rating of ratings">
+            <h3 class="card-header">
+                <rating [ratingValue]="rating.rating"></rating>
+            </h3>
+            <div class="card-block bg-light p-3">
+                <div class="clearfix">
+                    <p class="text-muted d-inline float-left" id="rating-author">{{rating.userName}}</p>
+                    <p class="text-muted d-inline float-right" id="rating-date">{{rating.date | date}}</p>
+                </div>    
+            </div>    
+        </div>
+    </div>    
+    
+    <div class="card" id="rating-Form">
+            <h3 class="card-header text-white bg-secondary">Add rating</h3>
+            <div class="card-block mt-2">
+                <div class="form-row">
+                    <div class="form-group col-md-8 d-inline-block p-3" id="name-field">
+                        <label for="inputName">Your Name</label>
+                        <input type="text" class="form-control" id="name" [(ngModel)]="newLocationRating.userName">
+                    </div>
+                    <div class="form-group col-md-4 d-inline-block p-3" id="rating-stars">
+                        <label for="inputRating">Rating</label>
+                        <div class="container">
+                            
+                            <div class="dropdown d-inline" id="rating-select">  
+                                <button class="btn btn-default dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <button class="dropdown-item" type="button"></button>
+                                    <button class="dropdown-item" type="button" *ngFor="let value of ratingValues; let i = index;"
+                                    (click)="newLocationRating.rating = i+1">{{ value }}</button>
+                                </div>
+                            </div>
+                            <rating [ratingValue]="newLocationRating.rating"></rating>
+                        </div>    
+                    </div>
+                </div>    
+                <div class="p-3">
+                    <button type="button" class="btn btn-primary mb-4 "
+                    (click)="addrating()"
+                    [disabled]="!newLocationRating.userName || !newLocationRating.rating">Submit</button>
+                </div>
+            </div>
+    </div>

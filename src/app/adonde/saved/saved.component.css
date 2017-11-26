@@ -1,0 +1,25 @@
+#SavedName{
+    padding: 5% 0 0 0%;
+    font-size: 80px;
+    color: #000;
+}
+.card {
+    width: 20em;
+    height: 30em;
+}
+
+#login:hover {
+    color: #0056b3;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+button:hover:enabled {
+    cursor: pointer;
+}
+
+.display-4:hover {
+    cursor: default;
+}

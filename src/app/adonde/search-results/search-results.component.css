@@ -29,10 +29,6 @@
     cursor: pointer;
 }
 
-button:hover:enabled {
+.custom-checkbox:hover {
     cursor: pointer;
-}
-
-.display-4:hover {
-    cursor: default;
 }

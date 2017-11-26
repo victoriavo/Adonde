@@ -14,10 +14,11 @@ import { AbstractControl } from '@angular/forms/src/model';
 export class SignupComponent {
   public newUser = new User();
   changeData: FormGroup;
+  public success: boolean = true;
 
   constructor(private router: Router, private http: HttpClient) {
     this.changeData = new FormGroup({
-      name: new FormControl(null, [Validators.required, Validators.minLength(3)]),
+      userName: new FormControl(null, [Validators.required, Validators.minLength(3)]),
       email: new FormControl(null, [Validators.required, Validators.email]),
       reemail: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required, Validators.minLength(8)])
@@ -29,15 +30,15 @@ export class SignupComponent {
   public signup() {
     this.http.post('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/signup',
       {
-        name: this.newUser.name.toString(),
+        name: this.newUser.userName.toString(),
         email: this.newUser.email.toString(),
         password: this.newUser.password.toString()
       }
-    ).subscribe(data => {
-      console.log(data);
+    ).subscribe(data => {console.log(data);
       if (data['valid'] == 0) {
-        alert('Something went wrong');
+        this.success = false;
       } else {
+        this.success = true;
         alert('Success');
         this.router.navigate(['/login']);
       }

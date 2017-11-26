@@ -1,0 +1,17 @@
+<div class="card border-warning" [hidden]="!isValid" style="width: 15rem;">
+        <div class="card-header text-white font-weight-bold">
+          Current Weather
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Temperature <span class="badge badge-info float-right">{{this.temperature}} &#176;F</span></li>
+          <li class="list-group-item">Humidity <span class="badge badge-info float-right">{{this.humidity}}%</span></li>
+          <li class="list-group-item">Description <span class="badge badge-info float-right">{{this.description}}</span></li>
+          <li class="list-group-item">Wind Speed <span class="badge badge-info float-right">{{this.wind}} mph</span></li>
+        </ul>
+</div>
+<div class="card border-warning text-center" style="width: 15rem;" [hidden]="isValid">
+    <div class="card-header text-white font-weight-bold">
+        Current Weather
+    </div>
+    <p class="text-dark text-center p-3">No information currently available.</p>
+</div>

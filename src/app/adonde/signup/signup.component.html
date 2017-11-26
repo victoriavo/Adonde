@@ -14,11 +14,14 @@
         </div>
     </nav>
     <div class="d-flex container bg-light flex-column px-0 pb-4 pt-2 col-md-3 rounded mt-4">
+        <div class="alert alert-danger" [hidden]="success" role="alert">
+            Something went wrong.
+        </div>
         <h1 class="text-center display-4 mb-3">Sign Up</h1>
         <div class="container">
             <form [formGroup]="changeData">
                 <div class="form-group">
-                    <input type="text" class="form-control lead" id="nameInput" placeholder="Name" formControlName="name">
+                    <input type="text" class="form-control lead" id="nameInput" placeholder="Name" formControlName="userName">
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control lead" id="emailInput" placeholder="Email" formControlName="email">

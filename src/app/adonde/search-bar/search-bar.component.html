@@ -30,25 +30,8 @@
                 name="endDate">
             </div>
             <button type="button" class="btn btn-success ml-3" id="SearchSubmit"
-            routerLink="/searchResults" (click)="passQuery()">Search</button>
+            routerLink="/searchResults" (click)="passQuery()" 
+            [disabled]="!newQuery.budget || !newQuery.origin || !newQuery.startDate || !newQuery.endDate"
+            >Search</button>
         </form>
 </div>
-<!--<div class="d-flex justify-content-center container rounded bg-secondary">
-    <form class="form-inline m-auto">
-        <div class="form-group">
-            <input type="number" class="form-control" id="budget" placeholder="Budget" min="0" step="10" style="width: 100px;">
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" id="origin" placeholder="Origin" style="width: 150px;">
-        </div>
-        <div class="form-group">
-            <label for="start-date">Start Date: </label>
-            <input type="date" class="form-control" id="start-date">
-        </div>
-        <div class="form-group">
-            <label for="start-date">End Date: </label>
-            <input type="date" class="form-control" id="end-date">
-        </div>
-        <button type="button" class="btn btn-success" routerLink="/searchResults">Search</button>
-    </form>
-</div>-->

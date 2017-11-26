@@ -1,5 +1,3 @@
-#logoutbutton {
-    position: fixed;
-    top: 0px;
-    right: 0px;
+a:hover {
+    cursor: pointer;
 }

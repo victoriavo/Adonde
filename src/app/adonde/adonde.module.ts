@@ -15,6 +15,16 @@ import { SearchResultsComponent } from './search-results/search-results.componen
 import { LocationDetailsComponent } from './location-details/location-details.component';
 import { PassResetComponent } from './pass-reset/pass-reset.component';
 import { bgAnimationComponent } from './bg-animation/bg-animation.component';
+import { EditAccountComponent } from './edit-account/edit-account.component';
+import { DeleteComponent } from './delete/delete.component';
+import { SavedComponent } from './saved/saved.component';
+import { WeatherComponent } from './weather/weather.component';
+import { FlightsComponent } from './flights/flights.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { FooterComponent } from './footer/footer.component';
+import { RatingComponent } from './rating/rating.component';
+import { RatingsComponent } from './ratings/ratings.component';
+import { ActivitiesComponent } from './activities/activities.component';
 
 
 @NgModule({
@@ -36,7 +46,17 @@ import { bgAnimationComponent } from './bg-animation/bg-animation.component';
         SearchBarComponent,
         SearchResultsComponent,
         LocationDetailsComponent,
-        bgAnimationComponent
+        bgAnimationComponent,
+        EditAccountComponent,
+        DeleteComponent,
+        SavedComponent,
+        WeatherComponent,
+        FlightsComponent,
+        AboutUsComponent,
+        FooterComponent,
+        RatingComponent,
+        RatingsComponent,
+        ActivitiesComponent
     ],
     exports: [
         
