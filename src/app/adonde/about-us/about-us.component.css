@@ -43,13 +43,13 @@ button:hover:enabled {
 }
 
 img {
-    width: 16vmin;
-    height: 16vmin;
+    max-width: 8vw;
+    /* max-height: 16vmin; */
     margin-top: 2vmin;
 }
 
 .person {
-    width: 20vmin;
-    margin-left: 3vmin;
-    margin-right: 3vmin;
+    max-width: 10vw;
+    margin-left: 1vw;
+    margin-right: 1vw;
 }
