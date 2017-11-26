@@ -14,9 +14,9 @@ export class SavedComponent {
     public name:string;
     public noSaved:boolean;
     locations: Location[] = [];
-    private hiddenArray: boolean[];
+    public hiddenArray: boolean[];
 
-    constructor(private router: Router, private http: HttpClient){}
+    constructor(public router: Router, public http: HttpClient){}
 
     ngOnInit(){
         if(localStorage.getItem('session_id') !== null){
@@ -35,6 +35,7 @@ export class SavedComponent {
                         }else{
                             this.noSaved = false;
                         }
+                        this.hiddenArray = Array(this.locations.length).fill(true);
                 });
                 }else{
                     this.loggedIn = false;
@@ -48,22 +49,20 @@ export class SavedComponent {
             this.router.navigate(['/']);
             this.noSaved = true;
         }
-
-        this.hiddenArray = Array(this.locations.length).fill(true);
     }
 
-    private unsave(location: number){
+    public unsave(location: number, index: number){
         this.http.delete('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/account/deletesavedlocation/' + localStorage.getItem('session_id') + '/' + location
         ).subscribe(data => {console.log(data);
           if (data['valid'] == 1) {
-            window.location.reload();
+            this.removeFromView(index);
           } else {
             console.log('didnt work');
           }
         });
       }
 
-      private removeFromView(x: number) {
+      public removeFromView(x: number) {
         this.hiddenArray[x] = false;
       }
     
