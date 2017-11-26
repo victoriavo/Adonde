@@ -46,7 +46,7 @@ export class SearchResultsComponent implements OnInit {
 
     public locationRepository: LocationRepository,
     public http: HttpClient,
-    qService: newQueryService
+    public qService: newQueryService
   ) {
     this.changeData = new FormGroup({
       budget: new FormControl(qService.sharedQuery.budget),
@@ -63,7 +63,7 @@ export class SearchResultsComponent implements OnInit {
 
     //SUBSCRIBE TO SERVICE AND SERVICE SUBSCRIBE TO IT    
     qService.queryChanged.subscribe((newValue: any) => this.newQuery = newValue);
-    this.changeData.valueChanges.subscribe(val => qService.changeQuery(val));
+    this.changeData.valueChanges.subscribe(val => this.changeQuery(val));
 
 
     this.http.get<Environment[]>('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/environments').subscribe(data => {
@@ -106,6 +106,13 @@ export class SearchResultsComponent implements OnInit {
     
   }
 
+  public changeQuery(data: Query) {
+    	    !this.newQuery.budget ? data.budget = null : data.budget = this.newQuery.budget;
+    	    !this.newQuery.origin ? data.origin = null : data.origin = this.newQuery.origin;
+    	    !this.newQuery.startDate ? data.startDate = null : data.startDate = this.newQuery.startDate;
+    	    !this.newQuery.endDate ? data.endDate = null : data.endDate = this.newQuery.endDate;
+    	    this.qService.changeQuery(data);
+  }
 
   public ngOnInit() {
     this.select = document.getElementById('locationCategory') as HTMLSelectElement;
@@ -178,7 +185,10 @@ export class SearchResultsComponent implements OnInit {
   }
 
   public handleQueryUpdated(newQuery: Query) {
-    this.newQuery = newQuery;
+    this.newQuery.budget = newQuery.budget;
+    this.newQuery.origin = newQuery.origin;
+    this.newQuery.startDate = newQuery.startDate;
+    this.newQuery.endDate = newQuery.endDate;
   }
 
   public removeFromView(x: number) {
@@ -223,6 +233,8 @@ export class SearchResultsComponent implements OnInit {
   }
 
   public filteredSearch(){
+    var locationIndex = this.select.selectedIndex; //******THIS IS THE SELECTED INDEX OF THE CURRENT QUERY******
+    console.log(locationIndex);
     this.http.post<Location[]>('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/search/filtered/flight/locations',
     { 
       "budget" : this.queries[this.queries.length -1].budget,
