@@ -6,4 +6,5 @@ export class Query{
     locationCategory?:string;
     minDistance?:number;
     maxDistance?:number;
+    minRating?:number;
 }

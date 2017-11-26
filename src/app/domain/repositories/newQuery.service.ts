@@ -20,6 +20,7 @@ export class newQueryService {
         this.sharedQuery.locationCategory = null as string;
         this.sharedQuery.minDistance = null as number;
         this.sharedQuery.maxDistance = null as number;
+        this.sharedQuery.minRating = null as number;
     }
 
     changeQuery(newData: Query){
@@ -29,6 +30,7 @@ export class newQueryService {
         !newData.locationCategory && (newData.locationCategory = null);
         !newData.minDistance && (newData.minDistance = null);
         !newData.maxDistance && (newData.maxDistance = null);
+        !newData.minRating && (newData.minRating = null);
         this.sharedQuery = newData;
         this.queryChanged.emit(this.sharedQuery);
     }
@@ -40,7 +42,8 @@ export class newQueryService {
             this.sharedQuery.endDate == null &&
             this.sharedQuery.locationCategory == null &&
             this.sharedQuery.minDistance == null &&
-            this.sharedQuery.maxDistance == null )
+            this.sharedQuery.maxDistance == null &&
+            this.sharedQuery.minRating == null)
             return true;
         else
             return false;
