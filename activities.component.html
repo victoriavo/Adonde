@@ -1,0 +1,25 @@
+<div class="card mb-3" id="no-activities" *ngIf="!activities.length">
+    <div class="card-block bg-light p-3">
+        <p id="no-activities-message">Sorry, there are no activities to show!</p>
+    </div>    
+</div>      
+    
+<!-- List group -->
+<div class="row">
+    <div class="col-4">
+        <div *ngFor="let activity of activities; let i = index">
+            <div class="list-group" id="myList" role="tablist">
+                <a class="list-group-item list-group-item-action active bg-info border-info" id="active" *ngIf="this.active == i" data-toggle="list" href="#{{i}}" role="tab">{{activity.name}}</a>
+                <a class="list-group-item list-group-item-action" *ngIf="this.active != i" (click)="this.active = i" data-toggle="list" href="#{{i}}" role="tab">{{activity.name}}</a>
+            </div>
+        </div>
+</div>
+  <!-- Tab panes -->
+  <div class="col-8">
+    <div *ngFor="let activity of activities; let i = index">
+            <div class="tab-content text-white">
+                <div *ngIf="this.active == i" class="tab-pane active" id="{{i}}" role="tabpanel">{{activity.description}}</div>
+            </div>
+        </div>
+    </div>
+</div>
