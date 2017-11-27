@@ -18,21 +18,26 @@ export class SearchResultsComponent implements OnInit {
   environments: Environment[] = [];
   public locationCategories = ['Beach', 'Mountains', 'Urban'];
   public newQuery = new Query;
-  savedLocations: Location[] = [];
+  //public locations: Location[];
   locations: Location[] = [];
-  public selectedLocation : Location = this.locations[0];
+  public selectedLocation: Location = this.locations[0];
   public results: string;
   public advancedShowing: boolean;
   public checks: boolean[] = [false, false, false];
-  public dropdownColor: string;
+  public dropdownColors: string[] = ['',''];
   public minmaxColor: string[] = ['text-muted', 'text-muted'];
   public select: HTMLSelectElement;
+  public select2: HTMLSelectElement;
   changeData: FormGroup;
-  public optionalFields = ['locationCategory', 'minDistance', 'maxDistance'];
+  public optionalFields = ['locationCategory', 'minDistance', 'maxDistance', 'minRating'];
   public hiddenArray: boolean[];
   public locationIndex: number;
   public savedArray: boolean[];
-  public loggedIn: boolean;
+  public suggestedLocations : Location[] = [];
+  public loggedIn : boolean = true;
+  public hideSuggestions = false;
+  public filteredByRatingLocations : number[] = [];
+  public ratingFilteredLocationObjects : Location[] = [];
 
   @Input()
   public query = this.newQuery;
@@ -55,7 +60,8 @@ export class SearchResultsComponent implements OnInit {
       endDate: new FormControl(qService.sharedQuery.endDate),
       locationCategory: new FormControl({ value: qService.sharedQuery.locationCategory, disabled: true }),
       minDistance: new FormControl({ value: qService.sharedQuery.minDistance, disabled: true }),
-      maxDistance: new FormControl({ value: qService.sharedQuery.maxDistance, disabled: true })
+      maxDistance: new FormControl({ value: qService.sharedQuery.maxDistance, disabled: true }),
+      minRating: new FormControl({ value: qService.sharedQuery.minRating, disabled: true })
     });
     this.newQuery = qService.sharedQuery;
     if (!qService.isNull())
@@ -75,50 +81,34 @@ export class SearchResultsComponent implements OnInit {
 
 
     });
-    if(localStorage.getItem('session_id') !== null && localStorage.getItem('session_id') != '0'){
-      this.http.get('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/session/' + localStorage.getItem('session_id')
-      ).subscribe(data => { 
-          if(data['valid'] == 1){
-              this.loggedIn = true;
-              if(this.queries[this.queries.length -1]){
-                this.filteredSearch();
-              }else{
-                this.showAll();
-              }
-          }else{
-              this.loggedIn = false;
-              localStorage.removeItem('session_id');
-              if(this.queries[this.queries.length -1]){
-                this.filteredSearch();
-              }else{
-                this.showAll();
-              }
-          }
-      });
-    }else{
-      this.loggedIn = false;
-      if(this.queries[this.queries.length -1]){
-        this.filteredSearch();
-      }else{
-        this.showAll();
-      }
+    if (this.queries[this.queries.length - 1]) {
+      this.filteredSearch();
     }
-    
+    else{
+      this.showAll();
+    }
+
+    this.checkIfLoggedIn();
+    if(this.loggedIn)
+      this.getSuggestedLocations();
   }
 
   public changeQuery(data: Query) {
-    	    !this.newQuery.budget ? data.budget = null : data.budget = this.newQuery.budget;
-    	    !this.newQuery.origin ? data.origin = null : data.origin = this.newQuery.origin;
-    	    !this.newQuery.startDate ? data.startDate = null : data.startDate = this.newQuery.startDate;
-    	    !this.newQuery.endDate ? data.endDate = null : data.endDate = this.newQuery.endDate;
-    	    this.qService.changeQuery(data);
+    !this.newQuery.budget ? data.budget = null : data.budget = this.newQuery.budget;
+    !this.newQuery.origin ? data.origin = null : data.origin = this.newQuery.origin;
+    !this.newQuery.startDate ? data.startDate = null : data.startDate = this.newQuery.startDate;
+    !this.newQuery.endDate ? data.endDate = null : data.endDate = this.newQuery.endDate;
+    this.qService.changeQuery(data);
   }
+
 
   public ngOnInit() {
     this.select = document.getElementById('locationCategory') as HTMLSelectElement;
+    this.select2 = document.getElementById('minRating') as HTMLSelectElement;
     this.advancedShowing = false;
-    this.dropdownColor = "text-muted";
-    
+    this.dropdownColors.fill("text-muted");
+
+    this.checkIfLoggedIn();
   }
 
   public ngAfterContentInit() {
@@ -131,31 +121,32 @@ export class SearchResultsComponent implements OnInit {
     this.queries.push(this.newQuery);
     this.locations = [];
     //this.showAll();
-    if(!this.queries[this.queries.length -1].budget &&
-      !this.queries[this.queries.length -1].startDate &&
-      !this.queries[this.queries.length -1].endDate &&
-      !this.queries[this.queries.length -1].origin &&
-      !this.queries[this.queries.length -1].minDistance &&
-      !this.queries[this.queries.length -1].maxDistance &&
-      !this.queries[this.queries.length -1].locationCategory){
-        this.showAll();
-      }
-      else{
+    if (!this.queries[this.queries.length - 1].budget &&
+      !this.queries[this.queries.length - 1].startDate &&
+      !this.queries[this.queries.length - 1].endDate &&
+      !this.queries[this.queries.length - 1].origin &&
+      !this.queries[this.queries.length - 1].minDistance &&
+      !this.queries[this.queries.length - 1].maxDistance &&
+      !this.queries[this.queries.length - 1].locationCategory &&
+      !this.queries[this.queries.length - 1].minRating) {
+      this.showAll();
+    }
+    else {
       this.filteredSearch();
-      }
+    }
   }
 
   public saveSearch() {
     this.queries.push(this.newQuery);
   }
 
-  public setLocationIndex(locationIndex: number){
+  public setLocationIndex(locationIndex: number) {
     this.locationIndex = locationIndex;
     this.selectedLocation = this.locations[locationIndex];
     console.log("locationIndex = " + locationIndex);
   }
   public viewLocationDetails(location_id: number) {
-    this.router.navigateByUrl('/locations/' + location_id);
+    this.router.navigateByUrl('/location/' + location_id);
   }
 
   public toggleAdvanced() {
@@ -164,13 +155,20 @@ export class SearchResultsComponent implements OnInit {
     this.advancedShowing = !this.advancedShowing;
   }
 
-  public dropdownChange() {
-    let control = this.changeData.get(this.optionalFields[0]);
+  public dropdownChange(x: number) {
+    if (x == 0) {
+      let control = this.changeData.get(this.optionalFields[0]);
     if (control.enabled)
-      (this.select.selectedIndex > 0) ? this.dropdownColor = "text-dark" : this.dropdownColor = "text-secondary";
+      (this.select.selectedIndex > 0) ? this.dropdownColors[x] = "text-dark" : this.dropdownColors[x] = "text-secondary";
     else
-      this.dropdownColor = "text-secondary";
-
+      this.dropdownColors[x] = "text-secondary";
+    } else {
+      let control = this.changeData.get(this.optionalFields[3]);
+    if (control.enabled)
+      (this.select2.selectedIndex > 0) ? this.dropdownColors[x] = "text-dark" : this.dropdownColors[x] = "text-secondary";
+    else
+      this.dropdownColors[x] = "text-secondary";
+    }
   }
 
   public minmaxChange(control: AbstractControl, x: number) {
@@ -180,7 +178,7 @@ export class SearchResultsComponent implements OnInit {
   public check(x: number) {
     let control = this.changeData.get(this.optionalFields[x]);
     control.disabled ? control.enable() : control.disable();
-    this.dropdownChange();
+    x == 0 ? this.dropdownChange(0) : this.dropdownChange(1);
     this.minmaxChange(control, x);
   }
 
@@ -194,6 +192,7 @@ export class SearchResultsComponent implements OnInit {
   public removeFromView(x: number) {
     this.hiddenArray[x] = false;
   }
+  
 
   isNull(array: any[]) {
     if (array) {
@@ -201,7 +200,7 @@ export class SearchResultsComponent implements OnInit {
         if (element)
           return false;
       });
-    return true;
+      return true;
     }
   }
 
@@ -220,6 +219,7 @@ export class SearchResultsComponent implements OnInit {
     });
   }
 
+
   public unsave(location: number){
     this.http.delete('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/account/deletesavedlocation/' + localStorage.getItem('session_id') + '/' + location
     ).subscribe(data => {console.log(data);
@@ -232,62 +232,140 @@ export class SearchResultsComponent implements OnInit {
     });
   }
 
-  public filteredSearch(){
-    var locationIndex = this.select.selectedIndex; //******THIS IS THE SELECTED INDEX OF THE CURRENT QUERY******
-    console.log(locationIndex);
+
+
+  public filteredSearch() {
+    if(this.select)
+      var locationIndex = this.select.selectedIndex; //******THIS IS THE SELECTED INDEX OF THE CURRENT QUERY******
+    //console.log(locationIndex);
     this.http.post<Location[]>('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/search/filtered/flight/locations',
-    { 
-      "budget" : this.queries[this.queries.length -1].budget,
-      "depart_date" : this.queries[this.queries.length -1].startDate,
-      "return_date" : this.queries[this.queries.length -1].endDate,
-      "origin" : this.queries[this.queries.length -1].origin,
-      "minimum_distance": this.queries[this.queries.length -1].minDistance,
-      "maximum_distance" : this.queries[this.queries.length -1].maxDistance,
-      "filtered_ids" : [this.queries[this.queries.length -1].locationCategory]
-    }).subscribe(data => {
+      {
+        "budget": this.queries[this.queries.length - 1].budget,
+        "depart_date": this.queries[this.queries.length - 1].startDate,
+        "return_date": this.queries[this.queries.length - 1].endDate,
+        "origin": this.queries[this.queries.length - 1].origin,
+        "minimum_distance": this.queries[this.queries.length - 1].minDistance,
+        "maximum_distance": this.queries[this.queries.length - 1].maxDistance,
+        "filtered_ids": [this.select ? this.select.selectedIndex : null]
+      }).subscribe(data => {
+        if( this.queries[this.queries.length - 1].minRating)
+        {
+          data.forEach(element => {
+            this.locations.push(element);
+          });
+          this.filterByRating(this.locations); //returns array of locations with correct rating
+        }
+        else{
+          data.forEach(element => {
+            this.locations.push(element);
+          });
+        }  
 
-    data.forEach(element => {
-      this.locations.push(element);
-    });
-
-    console.log(this.queries[this.queries.length -1].locationCategory)
-    this.hiddenArray = Array(this.locations.length).fill(true);
-    this.savedArray = Array(this.locations.length).fill(false);
-
-    if(this.loggedIn == true){
-      this.http.get<Location[]>('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/account/' + localStorage.getItem('session_id') + '/location/save/get',
-      ).subscribe(data => this.getSavedLocations(data));
-    }
-
-    });
-  }
-
-  public showAll(){
-    //Shows all locations 
-      this.http.get<Location[]>('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/locations').subscribe(data => {
-        data.forEach(element => {
-          this.locations.push(element);
-        });
-
+        //console.log(this.queries[this.queries.length - 1].locationCategory)
         this.hiddenArray = Array(this.locations.length).fill(true);
         this.savedArray = Array(this.locations.length).fill(false);
 
+        if(this.loggedIn == true){
+          this.http.get<Location[]>('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/account/' + localStorage.getItem('session_id') + '/location/save/get',
+          ).subscribe(data => this.getSavedLocations(data));
+        }
+
       });
+  }
+
+  public showAll() {
+    //Shows all locations 
+    this.http.get<Location[]>('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/locations').subscribe(data => {
+      // Read the result field from the JSON response. 
+      //this.results = data['location_id'];
+      //this.results = JSON.stringify(data);
+      //console.log(this.results);
+      //console.log(this.results);
+      //this.results = data['city'];
+      data.forEach(element => {
+        this.locations.push(element);
+      });
+
+      this.hiddenArray = Array(this.locations.length).fill(true);
+      this.savedArray = Array(this.locations.length).fill(false);
+
       if(this.loggedIn == true){
         this.http.get<Location[]>('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/account/' + localStorage.getItem('session_id') + '/location/save/get',
         ).subscribe(data => this.getSavedLocations(data));
       }
-    }
 
-    public getSavedLocations(data: any) {
-      for(var k = 0; k < this.locations.length; k++){
-        for(var j = 0; j < data['locations'].length; j++){
-          if(this.locations[k].location_id == data['locations'][j].location_id){
-            this.savedArray[k] = true;
-          }
+    });
+  }
+
+  public getSavedLocations(data: any) {
+    for(var k = 0; k < this.locations.length; k++){
+      for(var j = 0; j < data['locations'].length; j++){
+        if(this.locations[k].location_id == data['locations'][j].location_id){
+          this.savedArray[k] = true;
         }
       }
     }
-}
+  }
 
+  public getSuggestedLocations(){
+    this.http.get<Location[]>('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/suggestedLocations/'+ localStorage.getItem('session_id')
+    ).subscribe(data => {
+     this.results = JSON.stringify(data);
+     data['data'].forEach((element: any) => {
+      this.suggestedLocations.push(element);
+     });
+    });
   
+  }
+
+  public checkIfLoggedIn()
+  {
+    if (localStorage.getItem('session_id') !== null && localStorage.getItem('session_id') != '0') {
+      console.log(localStorage.getItem('session_id'));
+      this.http.get('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/session/' + localStorage.getItem('session_id')
+      ).subscribe(data => {
+        console.log(data)
+        if (data['valid'] == 1) {
+          this.loggedIn = true;
+        } else {
+          this.loggedIn = false;
+          localStorage.removeItem('session_id');
+        }
+      });
+    } else {
+      this.loggedIn = false;
+      console.log('not logged in');
+    }
+  }
+
+  public hideRecommendedLocations(){
+    this.hideSuggestions = true;
+  }
+
+  public filterByRating(locations : Location[]){
+    this.http.get<any[]>('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/location_ratings/min/' 
+    + this.queries[this.queries.length - 1].minRating)
+    .subscribe(data => {
+    data.forEach(element => {
+      this.filteredByRatingLocations.push(element['location_id']);
+     });
+
+    //check if the location_id of the locations that match by filter are the same as the ones that match by rating
+    //if so, add them to the locations array
+    if(this.filteredByRatingLocations){
+      locations.forEach(element => {
+        this.filteredByRatingLocations.forEach(inner_element =>{
+          if(inner_element == element['location_id'])
+          {
+            if(this.ratingFilteredLocationObjects)
+              this.ratingFilteredLocationObjects.push(element);
+          }
+        });
+      });
+      if(this.ratingFilteredLocationObjects)
+        this.locations = this.ratingFilteredLocationObjects;
+    }  
+
+    });
+   }
+}
