@@ -34,10 +34,12 @@ export class SearchResultsComponent implements OnInit {
   public locationIndex: number;
   public savedArray: boolean[];
   public suggestedLocations : Location[] = [];
+  public allLocations : Location[] = [];
   public loggedIn : boolean = true;
   public hideSuggestions = false;
   public filteredByRatingLocations : number[] = [];
   public ratingFilteredLocationObjects : Location[] = [];
+  public numOfLocations: number = 0;
 
   @Input()
   public query = this.newQuery;
@@ -71,6 +73,7 @@ export class SearchResultsComponent implements OnInit {
     qService.queryChanged.subscribe((newValue: any) => this.newQuery = newValue);
     this.changeData.valueChanges.subscribe(val => this.changeQuery(val));
 
+    this.getNumOfLocations();
 
     this.http.get<Environment[]>('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/environments').subscribe(data => {
       this.locationCategories = [];
@@ -263,7 +266,7 @@ export class SearchResultsComponent implements OnInit {
 
         //console.log(this.queries[this.queries.length - 1].locationCategory)
         this.hiddenArray = Array(this.locations.length).fill(true);
-        this.savedArray = Array(this.locations.length).fill(false);
+        this.savedArray = Array(this.numOfLocations).fill(false);
 
         if(this.loggedIn == true){
           this.http.get<Location[]>('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/account/' + localStorage.getItem('session_id') + '/location/save/get',
@@ -276,18 +279,12 @@ export class SearchResultsComponent implements OnInit {
   public showAll() {
     //Shows all locations 
     this.http.get<Location[]>('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/locations').subscribe(data => {
-      // Read the result field from the JSON response. 
-      //this.results = data['location_id'];
-      //this.results = JSON.stringify(data);
-      //console.log(this.results);
-      //console.log(this.results);
-      //this.results = data['city'];
       data.forEach(element => {
         this.locations.push(element);
       });
 
       this.hiddenArray = Array(this.locations.length).fill(true);
-      this.savedArray = Array(this.locations.length).fill(false);
+      this.savedArray = Array(this.numOfLocations).fill(false);
 
       if(this.loggedIn == true){
         this.http.get<Location[]>('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/account/' + localStorage.getItem('session_id') + '/location/save/get',
@@ -297,11 +294,20 @@ export class SearchResultsComponent implements OnInit {
     });
   }
 
+  public getNumOfLocations(){
+    this.http.get<Location[]>('http://ec2-18-216-113-131.us-east-2.compute.amazonaws.com/locations').subscribe(data => {
+      data.forEach((element: any) => {
+        this.allLocations.push(element);
+        this.numOfLocations++;
+      });
+    });
+  }
+
   public getSavedLocations(data: any) {
-    for(var k = 0; k < this.locations.length; k++){
+    for(var k = 0; k < this.allLocations.length; k++){
       for(var j = 0; j < data['locations'].length; j++){
-        if(this.locations[k].location_id == data['locations'][j].location_id){
-          this.savedArray[k] = true;
+        if(this.allLocations[k].location_id == data['locations'][j].location_id){
+          this.savedArray[data['locations'][j].location_id] = true;
         }
       }
     }
@@ -315,7 +321,6 @@ export class SearchResultsComponent implements OnInit {
       this.suggestedLocations.push(element);
      });
     });
-  
   }
 
   public checkIfLoggedIn()
