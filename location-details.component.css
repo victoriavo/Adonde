@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+#LocationName{
+    padding: 5% 0 0 0%;
+    font-size: 60px;
+    color: #000;
+    /* font-family: 'Merriweather', serif; */
+}
+
+.material-icons{ font-size: 12px; }
+
+#background {
+    position: fixed;
+    left: -5%;
+    right: -5%;
+    top: -5%;
+    bottom: -5%;
+    z-index: 1;
+    display: block;
+    width: 110vw;
+    height: 110vh;
+    filter: blur(10px);
+}
+
+#content {
+    position: relative;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    overflow: auto;
+}
+
+::-webkit-scrollbar { 
+    width: 0px;
+}
+
+#everything {
+    position: relative;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    overflow: auto;
+}
+navbar {
+    position:relative;
+    z-index: 9999;
+}
