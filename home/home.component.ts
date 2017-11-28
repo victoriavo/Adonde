@@ -4,7 +4,7 @@ import { Component, OnInit, Input } from '@angular/core';
   selector: 'home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
-})
+}) 
 export class HomeComponent {
   
 
