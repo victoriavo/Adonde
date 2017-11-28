@@ -1,0 +1,85 @@
+<div id="background" [ngStyle]="{ 'background-image': 'url(' + location.imagePath + ')', 
+'background-repeat': 'no-repeat', 
+'background-size': 'cover'}"></div>
+
+<body id="body">
+        <navbar></navbar>
+        <div class="container" id="content">
+            <div class="container"><a href="/searchResults">
+                <i class="material-icons">arrow_back</i>
+                Back to Search Results</a>
+            </div>
+            <div class="container" *ngIf="location">
+    
+                <div class="container" id="LocationName">
+                    
+                    <!--
+                    <h1 class="display-4">
+                    {{location.city}},
+                    <span class="text-muted"> {{location.country}}</span>
+                    <rating class=“float-right” [ratingValue]="ratingAverage"></rating>
+                    </h1>
+                    -->
+                    <div class="float-left" style="display:inline-block">
+                        <h1 class="display-4" style="display:inline">{{location.city}},</h1>
+                        <h1 class="display-4 text-muted" style="display:inline">{{location.country}}</h1>
+                    </div>
+                    <div class="float-right" style="display:inline-block">
+                        <h1 class="display-4" style="position:relative; bottom:-15px">
+                            <rating [ratingValue]="ratingAverage"></rating>
+                        </h1>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                
+                <div class="jumbotron bg-dark">
+                    <div class="row">
+                        <div class="container float-left" style="width: 40%">
+                            <p class="text-white">{{location.description}}</p>
+                            <hr class="my-4">
+                            
+                            <h4><span class="badge badge-danger">Safety Rating
+                                <span class="badge badge-light">{{location.safety_rating}}</span>
+                            </span></h4>
+                            <br>
+                            <hotels></hotels>
+                            
+                        </div>
+                        <iframe class="float-right mr-3 e2e-iframe-trusted-src"
+                            [src] = "trustedUrl"
+                            width="600" height="450" frameborder="0" style="border:0" allowfullscreen>
+                        </iframe>
+                        <div class="clearfix"></div>
+                    </div>
+                </div> 
+    
+                <div class="row">
+                    <div class="container col-md-8 float-right">
+                            <h3 class="display-4" style="font-size:40px">Activities</h3>                
+                            <div class="jumbotron bg-dark" style="height:50%">
+                                <activities></activities>
+                            </div> 
+                    </div>
+    
+                    <div class="container col-md-4 float-right">
+                        <h3 class="display-4" style="font-size:40px">Forecast</h3>                
+                        <div class="jumbotron bg-dark" style="width:100%; height:50%">
+                            <div class="container float-right">
+                                <weather></weather>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div> 
+                    </div>
+                    <div class="clearfix"></div>
+    
+                </div>    
+    
+    
+                <flights></flights>
+                <br><br>
+                <ratings *ngIf="location" (locationRatingsChange)="save()"></ratings>
+            </div>
+            <br>
+        </div>    
+    </body>
+    
