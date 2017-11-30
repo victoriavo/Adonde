@@ -1,0 +1,345 @@
+<!--
+<nav class="navbar navbar-expand-lg navbar-light bg-faded justify-content-between">
+    <a class="fixed-top-left ml-3 mt-2 h4" id="AppName" routerLink="/home">Ad‌&#243;nde</a>
+    <div class="ml-auto" id="navbarNav">
+      <ul class="navbar-nav ">
+        <li class="nav-item">
+          <a href routerLink="/login" class="d-inline" id="login">Login
+            <span class="sr-only"></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <div id="ResultsName">
+      <h1 class="display-4">
+        Results
+      </h1>
+    </div>
+  
+    <div class="jumbotron p-2 d-flex flex-column bg-faded" id="advanced-search">
+  
+      <search-bar bgcolor="bg-faded" class="mx-auto" (queryUpdated)="handleQueryUpdated($event)"></search-bar>
+  
+      <p class="text-muted mx-auto mt-3">
+        <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+          <input type="checkbox" class="custom-control-input" (change)="toggleAdvanced()">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">Show Advanced Search</span>
+        </label>
+      </p>    
+      <div class="container mt-3" id="advanced-search-attributes" [ngClass]="{'d-none': !advancedShowing}">
+        <form [formGroup]="changeData">
+        <div class="d-flex justify-content-center input-group col-md-6 mx-auto mb-3">
+          <span class="input-group-addon">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+              <input type="checkbox" id="check0" class="custom-control-input" (click)="check(0)">
+              <span class="custom-control-indicator"></span>
+            </label>
+          </span>
+          <select class="form-control w-50 d-inline" id="locationCategory" style="height:3em;" [ngClass]="dropdownColor" (change)="dropdownChange()"
+                  formControlName="locationCategory">
+            <option class="text-secondary" [ngValue]="null">
+              Destination Category
+            </option>
+            <option class="text-dark" *ngFor="let category of locationCategories; let i = index;" [ngValue]="category">
+              {{ category }}
+            </option>
+          </select>
+        </div>
+        <div class="d-flex justify-content-center input-group col-md-6 mx-auto mb-3">
+          <span class="input-group-addon">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+              <input type="checkbox" id="check1" class="custom-control-input" (click)="check(1)">
+              <span class="custom-control-indicator"></span>
+            </label>
+          </span>
+          <input type="number" class="form-control" id="minDistance" placeholder="Minimum Distance" min="0" step="10" style="width: 100px;"
+                 [ngClass]="minmaxColor[0]" formControlName="minDistance">
+          <span class="input-group-addon" [ngClass]="minmaxColor[0]">miles</span>
+        </div>
+        <div class="d-flex justify-content-center input-group col-md-6 mx-auto mb-3">
+          <span class="input-group-addon">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+              <input type="checkbox" id="check2" class="custom-control-input" (click)="check(2)">
+              <span class="custom-control-indicator"></span>
+            </label>
+          </span>
+          <input type="number" class="form-control" id="maxDistance" placeholder="Maximum Distance" min="0" step="10" style="width: 100px;"
+                 [ngClass]="minmaxColor[1]" formControlName="maxDistance">
+          <span class="input-group-addon" [ngClass]="minmaxColor[1]">miles</span>
+        </div>
+
+      -->
+<!-- Rating Advanced Search -->
+<!--
+        <div class="d-flex justify-content-center input-group col-md-6 mx-auto mb-3">
+          <span class="input-group-addon">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+              <input type="checkbox" id="check3" class="custom-control-input" (click)="check(3)">
+              <span class="custom-control-indicator"></span>
+            </label>
+          </span>
+          <select class="form-control w-50 d-inline" id="minRating" style="height:3em;" [ngClass]="dropdownColor" (change)="dropdownChange()"
+            formControlName="minRating">
+            <option class="text-secondary" [ngValue]="null">
+              Minimum Rating
+            </option>
+            <option class="text-dark" *ngFor="let rating of ratingValues; let i = index;" [ngValue]="category">
+              {{ rating }}
+            </option>
+          </select>
+        </div>
+      -->
+<!-- Rating Advanced Search -->
+<!--
+        <div class="d-flex">
+          <button type="button" class="btn btn-primary my-2 ml-auto mr-2 col-md-2" (click)="updateSearch()" [disabled]="!(queries.length > 0)">Update</button>
+          <button type="button" class="btn btn-primary my-2 mr-auto ml-2 col-md-2" (click)="saveSearch()">Save Search</button>
+        </div>
+        </form>
+      </div>
+    </div>
+    
+    <br>
+    <br>
+  
+    <h1 *ngIf="!locations.length" style="text-align: center">No Matching Locations Found</h1>
+
+
+    <div class="row" *ngIf="locations">
+      <div class="card border-info m-4" *ngFor="let location of locations; let i = index" [hidden]="!hiddenArray[i]">
+        <button type="button" class="close mr-1 cursor-pointer" aria-label="Close" 
+                style="position:absolute; right: 0; z-index: 1"
+                (click) = "removeFromView(i)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <img class="card-img-top" src="{{location.imagePath}}" alt="Card image cap" style="height:40%; position:relative">
+        <div class="card-body" style="height:50%; position:relative">
+          <h4 class="card-title">{{location.city}}</h4>
+          <p class="card-text" style="height:50%; overflow: hidden">{{location.description}}</p>
+          <br>
+          <div class="clearfix">
+              <a tabindex="0" class="btn btn-success cursor-pointer" [hidden]="!loggedIn || savedArray[location.location_id]" role="button" data-toggle="popover" data-trigger="focus" title="Why" data-content="what" (click)="save(location.location_id)">Save</a>
+              <a tabindex="0" class="btn btn-danger cursor-pointer" [hidden]="!loggedIn || !savedArray[location.location_id]" role="button" data-toggle="popover" data-trigger="focus" title="Why" data-content="what" (click)="unsave(location.location_id)">Unsave</a>
+              <button class="btn-info float-right" data-toggle="modal" data-target="#myModal" (click)="setLocationIndex(i)">Quick View</button>
+          </div>  
+        </div>
+        <div class="card-footer d-flex">
+          <div class="ml-auto">
+            {{location.country}}
+          </div>
+        </div>
+      </div>
+    </div>  
+  
+  <div class="d-flex "><small class="text-muted ml-auto" [hidden]="!isNull(hiddenArray)">Sourced from Wikipedia</small></div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content" *ngIf="selectedLocation">
+              <div class="modal-header">
+                  <h4 class="modal-title" id="myModalLabel">{{selectedLocation.city}}, {{selectedLocation.country}}</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <div class="modal-body">
+                  <p class="m-3">{{selectedLocation.description}}</p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" (click) = "viewLocationDetails(selectedLocation.location_id)" >View Full Details</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+-->
+
+<navbar textcolor="text-dark"></navbar>
+<div class="container">
+  <div id="ResultsName">
+    <h1 class="display-4">
+      Results
+    </h1>
+  </div>
+  <div class="jumbotron p-2 d-flex flex-column bg-faded" id="advanced-search">
+
+    <search-bar bgcolor="bg-faded" class="mx-auto" (queryUpdated)="handleQueryUpdated($event)"></search-bar>
+
+    <!--{{qService.sharedQuery | json}}-->
+
+    <p class="text-muted mx-auto mt-3">
+      <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+        <input type="checkbox" class="custom-control-input" (change)="toggleAdvanced()">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">Show Advanced Search</span>
+      </label>
+    </p>
+    <div class="container mt-3" id="advanced-search-attributes" [ngClass]="{'d-none': !advancedShowing}">
+      <form [formGroup]="changeData">
+        <div class="d-flex justify-content-center input-group col-md-6 mx-auto mb-3">
+          <span class="input-group-addon">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+              <input type="checkbox" id="check0" class="custom-control-input" (click)="check(0)">
+              <span class="custom-control-indicator"></span>
+            </label>
+          </span>
+          <select class="form-control w-50 d-inline" id="locationCategory" style="height:3em;" [ngClass]="dropdownColors[0]" (change)="dropdownChange(0)"
+            formControlName="locationCategory">
+            <option class="text-secondary" [ngValue]="null">
+              Destination Category
+            </option>
+            <option class="text-dark" *ngFor="let category of locationCategories; let i = index;" [ngValue]="category">
+              {{ category }}
+            </option>
+          </select>
+        </div>
+        <div class="d-flex justify-content-center input-group col-md-6 mx-auto mb-3">
+          <span class="input-group-addon">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+              <input type="checkbox" id="check1" class="custom-control-input" (click)="check(1)">
+              <span class="custom-control-indicator"></span>
+            </label>
+          </span>
+          <input type="number" class="pl-3 form-control" id="minDistance" placeholder="Minimum Distance" min="0" step="10" style="width: 100px;"
+            [ngClass]="minmaxColor[0]" formControlName="minDistance">
+          <span class="input-group-addon" [ngClass]="minmaxColor[0]">
+            <div class="">miles</div>
+          </span>
+        </div>
+        <div class="d-flex justify-content-center input-group col-md-6 mx-auto mb-3">
+          <span class="input-group-addon">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+              <input type="checkbox" id="check2" class="custom-control-input" (click)="check(2)">
+              <span class="custom-control-indicator"></span>
+            </label>
+          </span>
+          <input type="number" class="pl-3 form-control" id="maxDistance" placeholder="Maximum Distance" min="0" step="10" style="width: 100px;"
+            [ngClass]="minmaxColor[1]" formControlName="maxDistance">
+          <span class="input-group-addon" [ngClass]="minmaxColor[1]">
+            <div class="">miles</div>
+          </span>
+        </div>
+        <div class="d-flex justify-content-center input-group col-md-6 mx-auto mb-3">
+          <span class="input-group-addon">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+              <input type="checkbox" id="check0" class="custom-control-input" (click)="check(3)">
+              <span class="custom-control-indicator"></span>
+            </label>
+          </span>
+          <select class="form-control w-50 d-inline" id="minRating" style="height:3em;" [ngClass]="dropdownColors[1]" (change)="dropdownChange(1)"
+            formControlName="minRating">
+            <option class="text-secondary" [ngValue]="null">
+              Minimum Rating
+            </option>
+            <option class="text-dark ratingOption" *ngFor="let num of [1,2,3,4,5]; let i = index;" [ngValue]="i+1">
+              {{num}} &#9733;
+            </option>
+          </select>
+        </div>
+        <div class="d-flex">
+          <button type="button" class="btn btn-primary my-2 ml-auto mr-2 col-md-2" (click)="updateSearch()" [disabled]="!(queries.length > 0)">Update</button>
+          <button type="button" class="btn btn-primary my-2 mr-auto ml-2 col-md-2" (click)="saveSearch()">Save Search</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+
+  <div class="container" *ngIf="!hideSuggestions" [hidden]="!resultsValid && !loggedIn">
+    <div class="row col-md-12">
+      <h5 *ngIf="suggestedLocations">Recommended Locations</h5>
+      <button type="button" class="close mr-1 cursor-pointer" aria-label="Close" style="position:absolute; right: 0; z-index: 1"
+        (click)="hideRecommendedLocations()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div [hidden]="resultsValid">
+      <div class="alert alert-success p-2 rounded mt-2" style="width: 390px;">
+        Save some locations to begin receiving suggestions!
+      </div>
+    </div>
+    <div class="row" *ngIf="suggestedLocations && suggestedLocations.length">
+      <div class="card border-danger m-4" *ngFor="let suggestedLocation of suggestedLocations; let i = index">
+        <img class="card-img-top" src="{{suggestedLocation.imagePath}}" alt="Card image cap" style="height:40%; position:relative">
+        <div class="card-body" style="height:50%; position:relative">
+          <h4 class="card-title">{{suggestedLocation.city}}</h4>
+          <p class="card-text" style="height:50%; overflow: hidden">{{suggestedLocation?.description}}</p>
+          <br>
+          <div class="clearfix">
+            <a tabindex="0" class="btn btn-success cursor-pointer" [hidden]="!loggedIn || savedArray[suggestedLocation.location_id]"
+              role="button" data-toggle="popover" data-trigger="focus" (click)="save(suggestedLocation.location_id)">Save</a>
+            <a tabindex="0" class="btn btn-danger cursor-pointer" [hidden]="!loggedIn || !savedArray[suggestedLocation.location_id]"
+              role="button" data-toggle="popover" data-trigger="focus" (click)="unsave(suggestedLocation.location_id)">Unsave</a>
+            <button class="btn btn-info float-right cursor-pointer" data-toggle="modal" data-target="#myModal" (click)="setLocationIndex(suggestedLocation.location_id -1)">Quick View</button>
+          </div>
+        </div>
+        <div class="card-footer d-flex">
+          <div class="ml-auto">
+            {{suggestedLocation.country}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr *ngIf="suggestedLocations" class="my-4">
+  </div>
+
+
+
+
+  <h1 *ngIf="!locations.length" style="text-align: center">No Matching Locations Found</h1>
+
+  <div class="row" *ngIf="locations">
+    <div class="card border-info m-4" *ngFor="let location of locations; let i = index" [hidden]="!hiddenArray[i]">
+      <button type="button" class="close mr-1 cursor-pointer" aria-label="Close" style="position:absolute; right: 0; z-index: 1"
+        (click)="removeFromView(i)">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <img class="card-img-top" src="{{location.imagePath}}" alt="Card image cap" style="height:40%; position:relative">
+      <div class="card-body" style="height:50%; position:relative">
+        <h4 class="card-title">{{location.city}}</h4>
+        <p class="card-text" style="height:50%; overflow: hidden">{{location.description}}</p>
+        <br>
+        <div class="clearfix">
+          <a tabindex="0" class="btn btn-success cursor-pointer" [hidden]="!loggedIn || savedArray[location.location_id]" role="button"
+            data-toggle="popover" data-trigger="focus" (click)="save(location.location_id)">Save</a>
+          <a tabindex="0" class="btn btn-danger cursor-pointer" [hidden]="!loggedIn || !savedArray[location.location_id]" role="button"
+            data-toggle="popover" data-trigger="focus" (click)="unsave(location.location_id)">Unsave</a>
+          <button class="btn btn-info float-right cursor-pointer" data-toggle="modal" data-target="#myModal" (click)="setLocationIndex(i)">Quick View</button>
+        </div>
+      </div>
+      <div class="card-footer d-flex">
+        <div class="ml-auto">
+          {{location.country}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex ">
+    <small class="text-muted ml-auto" [hidden]="!isNull(hiddenArray)">Sourced from Wikipedia</small>
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content" *ngIf="selectedLocation">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">{{selectedLocation.city}}, {{selectedLocation.country}}</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p class="m-3">{{selectedLocation.description}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default cursor-pointer" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary cursor-pointer" data-dismiss="modal" (click)="viewLocationDetails(selectedLocation.location_id)">View Full Details</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,53 @@
+<div id="defined-ratings">
+    <div class="mb-2">
+        <h2 class="d-inline display-4" style="font-size:40px">Ratings</h2>
+        <h2 class=" d-inline display-4" style="font-size:40px">({{ratingCount}})
+        </h2>
+    </div>
+</div>
+<div class="card bg-dark text-white mb-0" id="rating-Form">
+    <!--     <div class="card mb-3" id="no-ratings">
+        <div class="card-block bg-light p-3"> -->
+    <p *ngIf="ratingCount==0" id="no-rating-message" class="mt-3 ml-3">Be the first to add a rating!</p>
+    <!--         </div>
+    </div> -->
+    <div class="card-block mt-2">
+        <form [formGroup]="changeData" class="mb-0">
+            <div class="form-row">
+                <div class="form-group col-md-6 d-inline-block p-3" id="name-field">
+                    <input type="text" class="form-control" id="name" formControlName="name" placeholder="Name">
+                </div>
+                <div class="form-group col-lg-6 d-inline-block p-3 mb-0" id="rating-stars">
+                    <!-- <label for="inputRating">Rating</label> -->
+                    <div class="container">
+
+                        <!-- <div class="dropdown d-inline" id="rating-select">  
+                        <button class="btn btn-default dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <button class="dropdown-item" type="button"></button>
+                            <button class="dropdown-item" type="button" *ngFor="let value of ratingValues; let i = index;"
+                            (click)="newLocationRating.rating = i+1">{{ value }}</button>
+                        </div>
+                    </div> -->
+                        <select class="form-control w-50 d-inline-block py-0" id="rating" formControlName="rating" [ngClass]="dropdownColor()">
+                            <option class="text-secondary" [ngValue]="null">
+                                Rating
+                            </option>
+                            <option class="text-dark ratingOption" *ngFor="let num of [1,2,3,4,5]; let i = index;" [ngValue]="i+1">
+                                {{num}} &#9733;
+                            </option>
+                        </select>
+                        <div class="col-md-2 d-inline" id="stars">
+                            <rating [ratingValue]="newLocationRating.rating"></rating>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="p-0 float-right mr-4">
+            <button *ngIf="loggedIn" type="button" class="btn btn-primary mb-4 " (click)="addLocationRating()" [disabled]="!newLocationRating.userName || !newLocationRating.rating || !loggedIn">Submit</button>
+            <button *ngIf="!loggedIn" type="button" class="btn btn-primary mb-4 " (click)="goToLogin()">Login to rate locations!</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="card border-warning" [hidden]="!isValid">
+  <div class="card-header text-white font-weight-bold">
+    Current Weather
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item d-flex justify-content-between">Temperature
+      <span class="badge badge-info my-auto">{{this.temperature}} &#176;F</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between">Humidity
+      <span class="badge badge-info my-auto">{{this.humidity}}%</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between">Description
+      <span class="badge badge-info my-auto">{{this.description}}</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between">Wind Speed
+      <span class="badge badge-info my-auto">{{this.wind}} mph</span>
+    </li>
+  </ul>
+</div>
+<div class="card border-warning text-center" [hidden]="isValid">
+  <div class="card-header text-white font-weight-bold">
+    Current Weather
+  </div>
+  <p class="text-dark text-center p-3">No information currently available.</p>
+</div>

@@ -1,0 +1,82 @@
+<div id="background" [ngStyle]="{ 'background-image': 'url(' + location.imagePath + ')', 
+'background-repeat': 'no-repeat', 
+'background-size': 'cover'}"></div>
+
+<body id="body">
+
+    <div class="" id="content">
+        <navbar textcolor="text-dark"></navbar>
+
+        <div class="container bg rounded pb-4" *ngIf="location">
+            <div class="container pl-0 pt-1 pb-0 mb-0">
+                <a routerLink="/searchResults">
+                    <i class="material-icons">arrow_back</i>
+                    Back to Search Results</a>
+            </div>
+            <div class="container pt-0" id="LocationName">
+
+                <!--
+                    <h1 class="display-4">
+                    {{location.city}},
+                    <span class="text-muted"> {{location.country}}</span>
+                    <rating class=“float-right” [ratingValue]="ratingAverage"></rating>
+                    </h1>
+                    -->
+                <div class="float-left" style="display:inline-block">
+                    <h1 class="display-4" style="display:inline">{{location.city}}</h1>
+                    <h1 class="display-4 text-muted" style="display:inline">{{location.country}}</h1>
+                </div>
+                <div class="float-right" style="display:inline-block" id="ratingDiv">
+                    <h1 class="display-4" style="position:relative; bottom:-15px" id="ratingH1">
+                        <rating [ratingValue]="ratingAverage"></rating>
+                    </h1>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="jumbotron bg-dark mb-4" id="detailsJumbo">
+                <div class="row">
+                    <div class="container float-left" style="width: 40%;">
+                        <p class="text-white mb-5">{{location.description}}</p>
+                        <div class="my-5">&nbsp;</div>
+                        <h4 class=" mt-5">
+                            <span class="badge badge-danger d-flex justify-content-between safe mb-0">
+                                <div class="my-auto">Safety Rating</div>
+                                <span class="badge badge-light my-auto">{{location.safety_rating}}</span>
+                            </span>
+                        </h4>
+                        <hotels></hotels>
+
+                    </div>
+                    <iframe class="float-right mr-3 e2e-iframe-trusted-src w-50" [src]="trustedUrl" frameborder="0" style="border:0" allowfullscreen>
+                    </iframe>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="container col-md-8 float-right">
+                    <h3 class="display-4">Activities</h3>
+                    <div class="jumbotron mb-4 bg-dark af">
+                        <activities></activities>
+                    </div>
+                </div>
+
+                <div class="container col-md-4 float-right">
+                    <h3 class="display-4">Forecast</h3>
+                    <div class="jumbotron mb-4 bg-dark w-100 af">
+                        <div class="container float-right">
+                            <weather></weather>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <flights></flights>
+            <ratings *ngIf="location" (newRatingSubmitted)="handleRatingUpdated($event)"></ratings>
+        </div>
+        <br>
+        <footercustom textcolor="text-white"></footercustom>
+    </div>
+</body>

@@ -1,0 +1,83 @@
+@media all and (max-width: 1920px) and (max-height: 1080px) {
+    div {
+        background: no-repeat fixed;
+        background-image: url('/src/images/sprite.png');
+        -webkit-background-size: 1920px 22680px;
+        background-size: 1920px 22680px;
+        background-position-x: center;
+        -webkit-animation:  change-bg 90s steps(21) infinite;
+        animation: change-bg 90s steps(21) infinite;
+        z-index: -1;
+    }
+
+    @-webkit-keyframes change-bg{
+        100% { background-position: 0px -22680px; }
+    }
+      
+    @keyframes change-bg {
+        100% { background-position: 0px -22680px; }
+    }
+}
+
+@media all and (min-width: 1921px) and (max-width: 2560px), all and (min-height: 1081px) and (max-height: 1440px){
+    div {
+        background: no-repeat fixed;
+        background-image: url('/src/images/sprite.png');
+        -webkit-background-size: 2560px 30240px;
+        background-size: 2560px 30240px;
+        background-position-x: center;
+        -webkit-animation:  change-bg 90s steps(21) infinite;
+        animation: change-bg 90s steps(21) infinite;
+        z-index: -1;
+    }
+
+    @-webkit-keyframes change-bg{
+        100% { background-position: 0px -30240px; }
+    }
+      
+    @keyframes change-bg {
+        100% { background-position: 0px -30240px; }
+    }
+}
+
+@media all and (min-width: 2561px) and (max-width: 3840px), all and (min-height: 1441px) and (max-height: 2160px){
+    div {
+        background: no-repeat fixed;
+        background-image: url('/src/images/sprite.png');
+        -webkit-background-size: 3840px 45360px;
+        background-size: 3840px 45360px;
+        background-position-x: center;
+        -webkit-animation:  change-bg 90s steps(21) infinite;
+        animation: change-bg 90s steps(21) infinite;
+        z-index: -1;
+    }
+
+    @-webkit-keyframes change-bg{
+        100% { background-position: 0px -45360px; }
+    }
+      
+    @keyframes change-bg {
+        100% { background-position: 0px -45360px; }
+    }
+}
+
+@media all and (min-width: 3841px), all and (min-height: 2161px){
+    div {
+        background: no-repeat fixed;
+        background-image: url('/src/images/sprite.png');
+        -webkit-background-size: 7680px 90720px;
+        background-size: 7680px 90720px;
+        background-position-x: center;
+        -webkit-animation:  change-bg 90s steps(21) infinite;
+        animation: change-bg 90s steps(21) infinite;
+        z-index: -1;
+    }
+
+    @-webkit-keyframes change-bg{
+        100% { background-position: 0px -90720px; }
+    }
+      
+    @keyframes change-bg {
+        100% { background-position: 0px -90720px; }
+    }
+}

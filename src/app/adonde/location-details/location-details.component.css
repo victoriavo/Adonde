@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+#LocationName{
+    padding: 5% 0 0 0%;
+    font-size: 60px;
+    color: #000;
+    /* font-family: 'Merriweather', serif; */
+}
+
+
+.material-icons{ font-size: 12px; }
+
+#background {
+    position: fixed;
+    left: -5%;
+    right: -5%;
+    z-index: 0;
+    display: block;
+    width: 110vw;
+    height: 110vh;
+    filter: blur(10px);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#content {
+    position: fixed;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    overflow: auto;
+}
+
+.bg {
+    background-color:rgba(255, 255, 255, 0.5);
+}
+
+.safe {
+    width: 185px;
+    height: 39.75px;
+}
+
+h3.display-4 {
+    font-size: 40px;
+}
+
+.af {
+    height: 450px;
+    padding: 0 16px!important;
+}
+
+.af>div.container {
+    margin-top: 32px;
+}
+
+@media screen and (max-width: 767px) {
+
+    #ratingDiv {
+        min-width: 100%;
+    }
+
+    rating {
+        margin-left: 0px!important;
+    }  
+
+    #detailsJumbo {
+        margin-top: 16px!important;
+    }
+}
+
+/* .safe {
+    font-size: 0.9vw;
+}
+
+@media screen and (min-width: 1200px){
+    .safe {
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    .safe {
+        font-size: 14px;
+    }
+}*/
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .af  {
+        
+    }
+}
+
+/*@media screen and (max-width: 767px) {
+    .safe {
+        font-size: 10px;
+    }
+} */

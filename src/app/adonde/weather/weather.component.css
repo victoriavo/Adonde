@@ -1,0 +1,14 @@
+.card-header {
+    background-color: #ffd700;   
+}
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    li {
+        padding: 12px 10px!important;
+        flex-direction: column!important;
+        text-align: center;
+    }
+
+    li span {
+        margin: auto;
+    }
+}

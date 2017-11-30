@@ -1,0 +1,6 @@
+div {
+    z-index: 5;
+    position: relative; 
+    height: auto; 
+    margin-bottom: 1vh;
+}

@@ -1,0 +1,63 @@
+.carousel-control-prev {
+    width: 3.5%;
+}
+
+.carousel-control-prev:focus {
+    opacity: 0.5;
+}
+
+
+.carousel-control-prev:hover {
+    opacity: 1;
+    background-color: rgba(255,255,255,0.15);
+}
+
+.carousel-control-next {
+    width: 3.5%;
+}
+
+.carousel-control-next:focus {
+    opacity: 0.5;
+}
+
+.carousel-control-next:hover {
+    opacity: 1;
+    background-color: rgba(255,255,255,0.15);
+}
+
+/* .carousel-control-prev-icon {
+    position: absolute;
+    left: 1.25vw;
+}
+
+.carousel-control-next-icon {
+    position: absolute;
+    right: 1.25vw;
+} */
+
+#baseSlide {
+    margin-left: 3.5%!important;
+    margin-right: 3.5%!important;
+    max-width: 93%!important;
+}
+
+li[data-target="#carouselExampleIndicators"] {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+    #baseSlide>h5 {
+        margin-top: 132px!important;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .card {
+        margin-left: 3.5%!important;
+        margin-right: 3.5%!important;
+    }
+}
+
+/* li[data-target="#carouselExampleIndicators"]::before, li[data-target="#carouselExampleIndicators"]::after {
+    cursor: default;
+} */

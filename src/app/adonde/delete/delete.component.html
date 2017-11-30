@@ -1,0 +1,18 @@
+<bg-animation style="z-index: 0;" class="w-100 h-100 fixed-top"></bg-animation>
+<navbar textcolor="text-white"></navbar>
+
+<div class="d-flex container bg-light flex-column px-5 pb-4 pt-2 col-md-3 rounded mt-4">
+    <div class="alert alert-danger" [hidden]="!deleted" role="alert">
+        Sorry- we were unable to delete your account.
+    </div>
+    <h1 class="text-center display-4 mb-3">Delete Account?</h1>
+    <div class="container text-center">
+        <p>Are you sure you want to delete your account? This cannot be undone.</p>
+    </div>
+    <div class="wrapper text-center p-3">
+        <button type="button" class="btn btn-danger" (click)="delete()">Delete Account</button>
+    </div>
+    <a class="text-center text-dark mb-3" routerLink="/edit">
+        <small>Return to Edit Account</small>
+    </a>
+</div>

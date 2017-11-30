@@ -1,0 +1,26 @@
+<div class="card mb-3 d-flex" id="no-activities" *ngIf="!activities.length" style="position: absolute; margin-top: 16px; width: 89%;">
+    <div class="card-block bg-light p-3 my-auto d-flex">
+        <p id="no-activities-message" class="my-auto">Sorry, there are no activities to show!</p>
+    </div>
+</div>
+
+<!-- List group -->
+<div class="row">
+    <div class="col-4">
+        <div class="list-group" id="myList" role="tablist">
+            <a class="list-group-item list-group-item-action bg-info border-info text-white" data-toggle="list" href="#{{i}}" *ngFor="let activity of activities; let i = index"
+                role="tab" [class.active]="i==0" (click)="activate(i)">{{activity.name}}</a>
+            <!-- <a class="list-group-item list-group-item-action in-active" (click)="this.active = i" data-toggle="list"
+                href="#{{i}}" *ngFor="let activity of activities; let i = index">{{activity.name}}</a> -->
+        </div>
+    </div>
+    <!-- Tab panes -->
+    <div class="col-8">
+        <div>
+            <div class="tab-content text-white">
+                <div *ngFor="let activity of activities; let i = index" class="tab-pane fade" id="{{i}}" role="tabpanel" [class.active]="i==0"
+                    [class.show]="i==0">{{activity.description}}</div>
+            </div>
+        </div>
+    </div>
+</div>

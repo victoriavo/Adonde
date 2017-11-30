@@ -1,0 +1,21 @@
+.date-picker.placeholder::before{
+    width:100%;    
+    color: #888888;
+    content:attr(placeholder);
+}
+
+.date-picker{
+    width:15rem;
+}
+
+.btn:hover:enabled {
+    cursor: pointer;
+}
+
+input[type="date"] {
+    cursor: text;
+}
+
+.display-4:hover {
+    cursor: default;
+}

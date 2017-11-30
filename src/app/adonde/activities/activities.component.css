@@ -1,0 +1,22 @@
+a.list-group-item-action {
+    background-color: white!important;
+    color: black!important;
+    border: 1px solid rgba(0,0,0,.125)!important;
+}
+
+a.list-group-item-action:hover {
+    background-color: #e0e0e0!important;
+}
+
+a.active {
+    background-color: #17a2b8!important;
+    color: white!important;
+}
+
+a.active:hover {
+    background-color: #17a2b8!important;
+}
+
+.row>div {
+    margin-top: 16px;
+}

@@ -1,0 +1,31 @@
+<bg-animation style="z-index: 0;" class="w-100 h-100 fixed-top"></bg-animation>
+
+<body>
+  <navbar textcolor="text-white"></navbar>
+
+  <div class="d-flex container bg-light flex-column px-5 pb-4 pt-2 col-md-3 rounded mt-4">
+      <div class="alert alert-danger" [hidden]="!changed" role="alert">
+          Sorry- we were unable to change your password
+      </div>
+    <h1 class="text-center display-4 mb-3">Password Change</h1>
+    <div class="container">
+      <form [formGroup]="changeData">
+        <div class="form-group">
+          <input type="password" class="form-control lead" id="oldPass" placeholder="Old Password" formControlName="oldpass">
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control lead" id="newPass" placeholder="New Password" formControlName="newpass">
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control lead" id="repeatPass" placeholder="Confirm New Password" formControlName="renpass">
+        </div>
+      </form>
+    </div>
+    <div class="wrapper text-center pt-3">
+      <button type="button" class="btn btn-primary" (click)="change()" [disabled]="!changeData.valid">Change</button>
+    </div>
+    <a class="text-center mt-3" routerLink="/edit">
+      <small>Return to Edit Account</small>
+    </a>
+  </div>
+</body>

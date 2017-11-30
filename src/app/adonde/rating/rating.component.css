@@ -1,0 +1,11 @@
+.full-star:after {
+    content: "\2605";
+}
+
+.empty-star:after {
+    content: "\2606";
+}
+
+span {
+    cursor: default;
+}
